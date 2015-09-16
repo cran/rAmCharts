@@ -1,4 +1,4 @@
-fa7b77437a10432d9223494ff9c314ad *DESCRIPTION
+5d477a4fa6ad23506c0ad712fcf4cf3c *DESCRIPTION
 33f7eb0e66a5918f8bf12bcb7b3803aa *NAMESPACE
 ef068335c4459bb25f426f997def567e *R/AmBalloon.R
 e31209757b8e5fa0707a5518b77b3e33 *R/AmChart.R
@@ -31,6 +31,8 @@ a271af7e3039160af9bbc8dec24f0a1b *R/TrendLine.R
 49ffa5ab3883d2700873d588bffd4ea7 *R/shinyExamples.R
 36fecc504b55e79a6f9bb584db39fdea *R/startupMessage.R
 f3732e5ad6a83f9581a9b13cfdb661cb *R/utils.R
+b01f488e71433c3e5308202fa8f3187f *inst/NOTICE.Rmd
+a15a5ce18f08ba77b23c8077ca888a66 *inst/NOTICE.pdf
 a24fcc92a472bdad65bfaf6e8e1d3d94 *inst/htmlwidgets/amAngularGauge.js
 f3105fa82728eafc25cc377dbadb9fec *inst/htmlwidgets/amAngularGauge.yaml
 e473eb3fe4cf60f6ed04577daf570dac *inst/htmlwidgets/amDrillChart.js
