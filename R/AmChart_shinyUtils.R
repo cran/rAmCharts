@@ -1,7 +1,7 @@
 #' @rdname amChartsOutput
 #' @export
 setGeneric( name = "amChartsOutput",
-            def = function(outputId, type, width, height) {standardGeneric("amChartsOutput")})
+            def = function(outputId, type = NULL, width, height) {standardGeneric("amChartsOutput")})
 #' @title SHINY
 #' @description Widget output function for use in Shiny
 #' @param outputId \code{character}.
@@ -10,8 +10,8 @@ setGeneric( name = "amChartsOutput",
 #' @param width \code{character}.
 #' @param height \code{character}.
 #' @rdname amChartsOutput
-setMethod(f = "amChartsOutput", signature = c("character", "character"),
-  definition = function(outputId, type, width, height)
+setMethod(f = "amChartsOutput", signature = c("character", "characterOrMissing"),
+  definition = function(outputId, type = NULL, width, height)
   {
     if (missing(width)) {
       width <- "100%"
@@ -20,18 +20,9 @@ setMethod(f = "amChartsOutput", signature = c("character", "character"),
       height <- "400px"
     } else {}
     
-    jsFile <- switch(type,
-                     "funnel" = "amFunnelChart",
-                     "gantt" = "amGanttChart",
-                     "gauge" = "amAngularGauge",
-                     "pie" = "amPieChart",
-                     "radar" = "amRadarChart",
-                     "serial" = "amSerialChart",
-                     "stock" = "amStockChart",
-                     "xy" = "amXYChart",
-                     "drill" = "amDrillChart",
-                     stop("type error")
-    )
+    jsFile <- ifelse(test = !is.null(type) && type == "drill",
+                     yes = "amDrillChart",
+                     no = "ramcharts_base") 
     
     htmlwidgets::shinyWidgetOutput(
       outputId = outputId,     
@@ -43,20 +34,44 @@ setMethod(f = "amChartsOutput", signature = c("character", "character"),
   }
 )
 
+#' @title Test the class of an exepression
+#' @description Only used in the package in 'renderAmCharts'.
+#' @param x expression passed to 'renderAmCharts'.
+#' Either an expression that generates an HTML widget.
+#' Or an expression that generates an AmChart.
+#' @details This function has only an internal purpose. Never use it.
+#' @export
+controlShinyPlot <- function(x) {
+  if (!"htmlwidget" %in% class(x) &&
+      (is(x, "AmChart") || is(x, "AmStockChart"))) {
+    plot(x)
+  } else {
+    x
+  }
+}
+
 #' @title SHINY
 #' @description Widget output function for use in Shiny
-#' @param expr \code{expression}.
-#' @param env see htmlwidgets doc
-#' @param quoted \code{logical}.
+#' @param expr an expression that generates an HTML widget.
+#' @param env the environment in which to evaluate expr.
+#' @param quoted is expr a quoted expression (with quote())?
+#' This is useful if you want to save an expression in a variable.
+#' @name renderAmCharts
 #' @rdname renderAmCharts
 #' @export
 renderAmCharts <- function(expr, env, quoted){
+  
   if (missing(env)) {
     env <- parent.frame()
   } else {}
+  
   if (missing(quoted)) {
     quoted <- FALSE
   } else {}
-  if (!quoted) { expr <- substitute(expr) } # force quoted
+  
+  if (!quoted) {
+    expr <- substitute(controlShinyPlot(expr))
+  } # force quoted
+  
   htmlwidgets::shinyRenderWidget(expr, amChartsOutput, env, quoted = TRUE)
 }

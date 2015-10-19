@@ -2,15 +2,20 @@
 % Please edit documentation in R/amHist.R
 \name{amHist}
 \alias{amHist}
-\title{Histograms}
+\title{Plotting histogram using rAmCharts}
 \usage{
-amHist(x, main = "Histogram", freq = TRUE, xlab = NULL, ylab = NULL,
-  ylim = NULL, plot = TRUE, col = NULL, labels = TRUE, ...)
+amHist(x, main = "Histogram", col = "gray", border = "gray",
+  freq = TRUE, xlab = NULL, ylab = NULL, ylim = NULL, plot = TRUE,
+  labels = TRUE, ...)
 }
 \arguments{
 \item{x}{a vector of values for which the histogram is desired.}
 
 \item{main}{\code{character}, title of the graph.}
+
+\item{col}{a colour to be used to fill the bars.}
+
+\item{border}{a colour for the borders.}
 
 \item{freq}{\code{logical}; if \code{TRUE}, the histogram graphic is a representation of frequencies,
 the counts component of the result; if FALSE, probability densities,
@@ -26,8 +31,6 @@ an histogram is plotted, otherwise a list of breaks and counts is returned.
 In the latter case, a warning is used if (typically graphical)
 arguments are specified that only apply to the \code{plot = TRUE} case.}
 
-\item{col}{a colour to be used to fill the bars. The default of NULL yields unfilled bars.}
-
 \item{labels}{logical or character.
 Additionally draw labels on top of bars, if not \code{FALSE};
 if \code{TRUE}, draw the counts or rounded densities;
@@ -36,12 +39,30 @@ if labels is a \code{character}, draw itself.}
 \item{...}{further arguments and graphical parameters passed to plot.histogram}
 }
 \description{
-amhist computes a histogram of the given data values.
+amHist computes a histogram of the given data values.
 If \code{plot = TRUE}, the resulting object of class \code{"histogram"} before it is returned.
 }
 \examples{
-x <- rnorm(100)
-amHist(x = x)
+x <- replicate(1000, {
+  if (round(runif(1))) {
+    rnorm(1)
+  } else {
+    rnorm(1, mean = 5)
+  }
+})
+
+# Default method
+(object <- amHist(x = x))
+print(object)
+
+# Without plot
+amHist(x = x, plot = FALSE)
+
+# With options
+amHist(x = x, border = "blue")
+amHist(x = x, col = "lightblue", breaks = 100)
+amHist(x = x, col = "grey", breaks = 100)
+amHist(x = x, col = "gray")
 amHist(x = x, freq = FALSE)
 amHist(x = x, breaks = "Scott")
 amHist(x = x, breaks = "Scott", labels = TRUE)

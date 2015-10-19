@@ -1,42 +1,34 @@
-#' @include AmObject.R
+#' @include AmObject.R basicClassUnions.R
 NULL
 
 #' @title ChartScrollbar class
 #' @author DataKnowledge
 #' 
-#' @slot updateOnReleaseOnly
-#' Object of class \code{logical}.
+#' @description Create a scrollbar for amSerialChart and amXYChart charts.
+#' @details Run \code{api("ChartScrollbar")} for more information and all avalaible properties.
+#' 
+#' @slot enabled \code{logical}.
 #' Specifies if the chart should be updated while dragging/resizing the scrollbar
 #' or only at the moment when user releases mouse button.
-#' 
-#' @slot graph
-#' Object of class \code{list}.
+#' @slot graph \code{list}.
 #' Specifies which graph properties will be displayed in the scrollbar.
 #' Only Serial chart's scrollbar can display a graph.
-#' 
-#' @slot listeners
-#' Object of class \code{"list"} containining the listeners to add to the object.
+#' @slot listeners \code{list} containining the listeners to add to the object.
 #' The list must be named as in the official API. Each element must a character string.
 #' See examples for details.
-#' 
-#' @slot otherProperties
-#' Object of class \code{"list"},
+#' @slot otherProperties \code{list},
 #' containing other avalaible properties non coded in the package yet.
-#' 
-#' @slot value
-#' Object of class \code{numeric}.
+#' @slot value \code{numeric}.
 #' 
 #' @export
-setClass( Class = "ChartScrollbar", contains = "AmObject",
-          representation = representation(graph = "list", updateOnReleaseOnly = "logical" )
-)
+setClass(Class = "ChartScrollbar", contains = "AmObject",
+         representation = representation(graph = "listOrCharacter", enabled = "logical" ))
 
 #' @title Initialize a ChartScrollbar
 #' @param .Object \linkS4class{ChartScrollbar}.
 #' @param graph \linkS4class{AmGraph}.
 #' Specifies which graph will be displayed in the scrollbar.
-#' @param pathToImages \code{character} URL to API images (for buttons)
-#' @param updateOnReleaseOnly \code{logical}.
+#' @param enabled \code{logical}.
 #' Specifies if the chart should be updated while dragging/resizing the scrollbar
 #' or only at the moment when user releases mouse button.
 #' @param ... Other preperties
@@ -49,98 +41,66 @@ setClass( Class = "ChartScrollbar", contains = "AmObject",
 setMethod(f = "initialize", signature = "ChartScrollbar",
           definition = function(.Object,
                                 graph,
-                                pathToImages = "http://www.amcharts.com/lib/3/images/",
-                                updateOnReleaseOnly, ...)
+                                enabled, ...)
           { 
             if (!missing(graph)) {
               .Object <- setGraph(.Object, graph = graph)
             } else {}
-            if(!missing(updateOnReleaseOnly)){
-              .Object@updateOnReleaseOnly <- updateOnReleaseOnly
+            if(!missing(enabled)){
+              .Object@enabled <- enabled
             } else {}
-            .Object <- setProperties(.Object, pathToImages = pathToImages,...)
+            .Object <- setProperties(.Object,...)
             validObject(.Object)
             return(.Object)
           })
 
-
 #' @describeIn initialize-ChartScrollbar
 #' @examples
 #' chartScrollbar()
-#' chartScrollbar(updateOnReleaseOnly = TRUE)
+#' chartScrollbar(enabled = TRUE)
 #' @export
-chartScrollbar <- function(graph,
-                           pathToImages = "http://www.amcharts.com/lib/3/images/",
-                           updateOnReleaseOnly,...){
-  .Object <- new("ChartScrollbar", pathToImages = pathToImages)
+chartScrollbar <- function(graph, enabled = TRUE,...){
+  .Object <- new("ChartScrollbar", enabled = enabled)
   if (!missing(graph)) {
     .Object <- setGraph(.Object, graph)
-  } else {}
-  if (!missing(updateOnReleaseOnly)) {
-    .Object@updateOnReleaseOnly <- updateOnReleaseOnly
   } else {}
   .Object <- setProperties(.Object, ...)
   validObject(.Object)
   return( .Object )
 }
 
-# > @graph : setters ####
-
+#' @describeIn initialize-ChartScrollbar
+#' @description ChartScrollbarSettings settings set's settings for chart scrollbar.
+#' If you change a property after the chart is initialized,
+#' you should call stockChart.validateNow() method in order for it to work.
+#' If there is no default value specified, default value of ChartScrollbar class will be used.
+#' Run \code{api("ChartScrollbarSettings")} for more information.
 #' @examples
-#' setGraph(.Object = chartScrollbar(), test = 1)
-#' @rdname initialize-ChartScrollbar
+#' chartScrollbar()
+#' chartScrollbar(enabled = TRUE)
 #' @export
-setMethod(f = "setGraph", signature = c("ChartScrollbar"),
-           definition = function(.Object, graph = NULL, ...)
-           {
-             if (is.null(graph) && !missing(...)) {
-               .Object@otherProperties <- rlist::list.append(
-                 .Object@otherProperties,  graph = listProperties(amGraph(...))
-               )
-             } else if (is.null(graph) && missing(...)) {
-               .Object@otherProperties <- rlist::list.append(
-                 .Object@otherProperties,  graph = listProperties(amGraph(balloonText = "[[value]]"))
-               )
-             } else if (!is.null(graph) && is(graph, "AmGraph")) {
-               .Object@otherProperties <- rlist::list.append(
-                 .Object@otherProperties,  graph = listProperties(graph)
-               )
-             } else if (!is.null(graph) && is(graph, "character")) {
-               .Object@otherProperties <- rlist::list.append(
-                 .Object@otherProperties,  graph = graph
-               )
-             } else {}
-             validObject(.Object)
-             return(.Object)
-           })
-
-# > @updateOnReleaseOnly : setters ####
-
-#' @rdname initialize-ChartScrollbar
-#' @export
-setGeneric(name = "setUpdateOnReleaseOnly",
-           def = function(.Object, updateOnReleaseOnly){ standardGeneric("setUpdateOnReleaseOnly") } )
-#' @examples
-#' setUpdateOnReleaseOnly(.Object = chartScrollbar(), updateOnReleaseOnly = TRUE)
-#' @rdname initialize-ChartScrollbar
-#' @export
-setMethod(f = "setUpdateOnReleaseOnly", signature = c("ChartScrollbar", "logical"),
-          definition = function(.Object, updateOnReleaseOnly)
-          {
-            .Object@updateOnReleaseOnly <- updateOnReleaseOnly
-            validObject(.Object)
-            return(.Object)
-          })
+chartScrollbarSettings <- function(graph, enabled = TRUE,...){
+  .Object <- new("ChartScrollbar", enabled = enabled)
+  if (!missing(graph)) {
+    .Object <- setGraph(.Object, graph)
+  } else {}
+  .Object <- setProperties(.Object, ...)
+  validObject(.Object)
+  return( .Object )
+}
 
 #' @rdname listProperties-AmObject
 #' @examples
-#' listProperties(chartScrollbar(updateOnReleaseOnly = TRUE))
+#' listProperties(chartScrollbar(enabled = TRUE))
 setMethod( f = "listProperties", signature = "ChartScrollbar",
            definition = function(.Object)
            { 
              ls <- callNextMethod()
-             if (length( .Object@updateOnReleaseOnly)) {
-               ls <- rlist::list.append(ls, updateOnReleaseOnly = .Object@updateOnReleaseOnly)
+             if (length(.Object@graph)) {
+               ls <- rlist::list.append(ls, graph = .Object@graph)
+             } else {}
+             if (length(.Object@enabled)) {
+               ls <- rlist::list.append(ls, enabled = .Object@enabled)
              } else {}
              return(ls)
            })

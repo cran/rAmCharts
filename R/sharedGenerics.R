@@ -1,6 +1,12 @@
 #' @title Shared generics methods
-#' @details setDataProvider(..) is hared by AmGraph and DataSet
+#' @details \code{setBalloon} is shared by AmChart and AmStockChart
 #' @param .Object \linkS4class{AmObject}.
+#' @param amBalloon \linkS4class{AmBalloon}.
+#' @rdname shared-generics
+#' @export
+setGeneric(name = "setBalloon", def = function(.Object, amBalloon = NULL, ...) {standardGeneric("setBalloon")})
+
+#' @details setDataProvider(..) is shared by AmGraph and DataSet
 #' @param dataProvider \code{data.frame}.
 #' @param keepNA \code{logical}, default \code{TRUE}.
 #' Indicates if \code{NULL} values have to be kept or ignored. 
@@ -48,9 +54,3 @@ setGeneric(name = "setText", def = function(.Object, text){ standardGeneric("set
 #' @export
 setGeneric(name = "setValueAxis",
            def = function(.Object, valueAxis = NULL, ...){ standardGeneric("setValueAxis") } )
-
-#' @details addValueAxis(...) is shared by TrendLine and Guide
-#' @rdname shared-generics
-#' @export
-setGeneric( name = "addValueAxis",
-            def = function(.Object, valueAxis = NULL, ... ) { standardGeneric("addValueAxis") } )

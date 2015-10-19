@@ -1,6 +1,3 @@
-#' @include AmChart_getSet.R
-NULL
-
 #' @examples
 #' amChart(type = "pie")
 #' @describeIn initialize-AmChart
@@ -8,11 +5,10 @@ NULL
 amChart <- function(allLabels, arrows, axes, balloon, categoryAxis, categoryField,
                     chartCursor, chartScrollbar, creditsPosition, dataProvider,
                     graph, graphs, guides, legend, segmentsField, theme, titles,
-                    trendLines, type, valueAxes, valueAxis,
-                    pathToImages = "http://www.amcharts.com/lib/3/images/",...)
+                    trendLines, type, valueAxes, valueAxis,...)
 {
   # "http://www.amcharts.com/lib/3/images/"
-  object <- new(Class="AmChart", pathToImages = pathToImages)
+  object <- new(Class="AmChart")
   if (!missing(allLabels)) {
     object <-setAllLabels( object, allLabels )
   } else {}
@@ -95,13 +91,15 @@ amAngularGaugeChart <- function(arrows, titles, axes, ...)
 
 #' @details amFunnelChart is a shortcut
 #' for instantiating AmChart of type \code{funnel}
+#' @param marginLeft \code{character}, left margin of the chart.
+#' @param marginRight \code{character}, right margin of the chart.
 #' @examples
 #' amFunnelChart(marginLeft = 15)
 #' @describeIn initialize-AmChart
 #' @export
-amFunnelChart <- function(dataProvider, ...)
+amFunnelChart <- function(dataProvider, marginLeft = 10, marginRight = 10,...)
 {
-  object <- amChart(dataProvider = dataProvider, marginLeft = 10, marginRight = 10,
+  object <- amChart(dataProvider = dataProvider, marginLeft = marginLeft, marginRight = marginRight,
                     type = "funnel", ...)
   validObject(object)
   return(object)

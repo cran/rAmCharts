@@ -1,5 +1,5 @@
-#' @title Histograms
-#' @description  amhist computes a histogram of the given data values.
+#' @title Plotting histogram using rAmCharts
+#' @description  amHist computes a histogram of the given data values.
 #' If \code{plot = TRUE}, the resulting object of class \code{"histogram"} before it is returned.
 #' @param x a vector of values for which the histogram is desired.
 #' @param main \code{character}, title of the graph.
@@ -13,15 +13,34 @@
 #' an histogram is plotted, otherwise a list of breaks and counts is returned.
 #' In the latter case, a warning is used if (typically graphical)
 #' arguments are specified that only apply to the \code{plot = TRUE} case.
-#' @param col a colour to be used to fill the bars. The default of NULL yields unfilled bars.
+#' @param col a colour to be used to fill the bars.
+#' @param border a colour for the borders.
 #' @param labels logical or character.
 #' Additionally draw labels on top of bars, if not \code{FALSE};
 #' if \code{TRUE}, draw the counts or rounded densities;
 #' if labels is a \code{character}, draw itself.
 #' @param ... further arguments and graphical parameters passed to plot.histogram
 #' @examples
-#' x <- rnorm(100)
-#' amHist(x = x)
+#' x <- replicate(1000, {
+#'   if (round(runif(1))) {
+#'     rnorm(1)
+#'   } else {
+#'     rnorm(1, mean = 5)
+#'   }
+#' })
+#' 
+#' # Default method
+#' (object <- amHist(x = x))
+#' print(object)
+#' 
+#' # Without plot
+#' amHist(x = x, plot = FALSE)
+#' 
+#' # With options
+#' amHist(x = x, border = "blue")
+#' amHist(x = x, col = "lightblue", breaks = 100)
+#' amHist(x = x, col = "grey", breaks = 100)
+#' amHist(x = x, col = "gray")
 #' amHist(x = x, freq = FALSE)
 #' amHist(x = x, breaks = "Scott")
 #' amHist(x = x, breaks = "Scott", labels = TRUE)
@@ -30,12 +49,12 @@
 #'        ylab = "y-axis", xlab = "x-axis", ylim = c(10, 15))
 #' amHist(rnorm(100), breaks = "Scott", main = "Histogram", 
 #'        ylab = "y-axis", xlab = "x-axis")
+#'        
 #' @import data.table
 #' @export
-amHist <- function(x, main = "Histogram",
-                   freq = TRUE, xlab = NULL, ylab = NULL,
-                   ylim = NULL, plot = TRUE, col = NULL,
-                   labels = TRUE, ...)
+amHist <- function(x, main = "Histogram", col = "gray", border = "gray",
+                   freq = TRUE, xlab = NULL, ylab = NULL, ylim = NULL,
+                   plot = TRUE, labels = TRUE, ...)
 {
   if (!requireNamespace(package = "pipeR")) {
     stop ("Please install the package pipeR for running this function")
@@ -68,22 +87,46 @@ amHist <- function(x, main = "Histogram",
     if (is.null(xlab)) {
       xlab <- "x"
     } else {}
-    
-    pipeR::pipeline(
-      amSerialChart(theme = "light", categoryField = "x", creditsPosition = "top-right",
-                    columnSpacing = 0, columnWidth = 1, fillAlphas = 1, lineAlpha = 0),
-      setDataProvider(data.table(x = resHist$mids, y = y, 
-                                 cut = paste0("(", paste(resHist$breaks[-length(resHist$breaks)],
-                                                         resHist$breaks[-1], sep = ", "), ")"))),
-      addGraph(balloonText = "[[cut]]: <b>[[value]]</b>", type = "column",
-               valueField = "y", fillAlphas = .8, lineAlpha = .2, fillColors = col,
-               labelText = amLabels, showAllValueLabels = TRUE),
-      addGraph(valueField = "y", type = "smoothedLine", lineColor = "black"),
-      addValueAxes(title = ylab, minimum = ylim[1], maximum = ylim[2]),
-      setCategoryAxis(title = xlab),
-      addTitle(text = main, size = 18),
-      setExport(position = "top-right"),
-      setChartCursor(), plot()
-    )
+    dp <- dataAmHist(resHist, y, col)
+    plotAmHist(dp, amLabels, ylim, main, ylab, xlab, border)
   }
+}
+
+
+#' @examples
+#' pipeR::pipeline(
+#' amHist(iris$Sepal.Length),
+#' setExport()
+#' )
+#' @noRd
+plotAmHist <- function(dp, amLabels, ylim, main, ylab, xlab, border) {
+  pipeR::pipeline(
+    amSerialChart(theme = "light", categoryField = "x", creditsPosition = "bottom-right",
+                  columnSpacing = 0, columnWidth = 1, fillAlphas = 1, lineAlpha = 1,
+                  dataProvider = dp),
+    addGraph(balloonText = "<b>[[value]]</b> <br/> [[cut]] ", type = "column",
+             valueField = "y", fillAlphas = .8, lineAlpha = 1, fillColorsField = "color",
+             lineColor = border),
+    addGraph(valueField = "y", type = "smoothedLine", lineColor = "black",
+             balloonText = "", id = "graph-line"),
+    addValueAxes(title = ylab, minimum = ylim[1], maximum = ylim[2]),
+    setCategoryAxis(title = xlab),
+    addTitle(text = main, size = 18),
+    setChartScrollbar(graph = "graph-line", scrollbarHeight = 30, backgroundAlpha = 0,
+                      offset = 60, autoGridCount = TRUE,
+                      dragIcon = "dragIconRectBigBlack", oppositeAxis = FALSE, color = '#888888',
+                      backgroundAlpha = 0, selectedBackgroundAlpha = 0.1,
+                      selectedBackgroundColor = '#888888', graphFillAlpha = 0,
+                      selectedGraphFillAlpha = 0, graphLineAlpha = 0.8,
+                      selectedGraphLineColor = '#888888', selectedGraphLineAlpha = 1),
+    setChartCursor()
+  )
+}
+
+dataAmHist <- function (resHist, y, col)
+{
+  data_DT <- data.table(x = round(resHist$mids, 1), y = y, 
+                        cut = paste0("(from ", round(resHist$breaks[-length(resHist$breaks)], 2),
+                                     " to ", round(resHist$breaks[-1], 2), ")"))
+  data_DT[, eval(parse(text = "color:=col"))]
 }

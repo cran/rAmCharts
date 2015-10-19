@@ -5,28 +5,32 @@
 \alias{Guide-class}
 \title{Guide class}
 \description{
-Guide class
+Creates a horizontal/vertical guideline-/area for
+amSerialChart, amXYChart and amRadarChart charts,
+automatically adapts it's settings from the axes if none has been specified.
+}
+\details{
+Run \code{api("Guide")} for more information and all avalaible properties.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{fillAlpha}}{Object of clas \code{numeric}.
+\item{\code{fillAlpha}}{\code{numeric}.
 Specifies if a grid line is placed on the center of a cell or on the beginning of a cell.
 Possible values are: "start" and "middle" This setting doesn't work if parseDates is set to true.}
 
-\item{\code{valueAxis}}{Object of class \code{list},
-containing properties of a \linkS4class{ValueAxis} class.
+\item{\code{valueAxis}}{\linkS4class{ValueAxis}.
 As you can add guides directly to the chart, you might need to specify
 which value axis should be used.}
 
-\item{\code{listeners}}{Object of class \code{"list"} containining the listeners to add to the object.
+\item{\code{listeners}}{\code{list} containining the listeners to add to the object.
 The list must be named as in the official API. Each element must a character string.
 See examples for details.}
 
-\item{\code{otherProperties}}{Object of class \code{"list"},
+\item{\code{otherProperties}}{\code{list},
 containing other avalaible properties non coded in the package yet.}
 
-\item{\code{value}}{Object of class \code{numeric}.}
+\item{\code{value}}{\code{numeric}.}
 }}
 \author{
 DataKnowledge

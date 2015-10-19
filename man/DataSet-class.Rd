@@ -5,34 +5,35 @@
 \alias{DataSet-class}
 \title{DataSet class}
 \description{
-DataSet class
+DataSet is objects which holds all information about data.
+}
+\details{
+Run \code{api("DataSet")} for mor information.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{dataProvider}}{Object of class \code{list}. The data set data.
+\item{\code{dataProvider}}{\code{list}. The data set data.
 Important: the data sets need to come pre-ordered in ascending order.
 Data with incorrect order might result in visual and functional glitches on the chart.}
 
-\item{\code{fieldMappings}}{Object of class \code{list}.
-Array of field mappings.
+\item{\code{fieldMappings}}{\code{list} field mappings.
 Field mapping is an object with fromField and toField properties.
 fromField is a name of your value field in dataProvider.
 toField might be chosen freely,
 it will be used to set value/open/close/high/low fields for the StockGraph.
 Example: {fromField:"val1", toField:"value"}.}
 
-\item{\code{stockEvents}}{Object of class \code{list}.
-Containing properties of stockEvents.}
+\item{\code{stockEvents}}{\code{list} of \linkS4class{StockEvent}.}
 
-\item{\code{listeners}}{Object of class \code{"list"} containining the listeners to add to the object.
+\item{\code{listeners}}{\code{list} containining the listeners to add to the object.
 The list must be named as in the official API. Each element must a character string.
 See examples for details.}
 
-\item{\code{otherProperties}}{Object of class \code{"list"},
+\item{\code{otherProperties}}{\code{list},
 containing other avalaible properties non coded in the package yet.}
 
-\item{\code{value}}{Object of class \code{numeric}.}
+\item{\code{value}}{\code{numeric}.}
 }}
 \author{
 DataKnowledge

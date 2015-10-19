@@ -4,29 +4,25 @@ NULL
 #' @title ValueAxis class
 #' @author DataKnowledge
 #' 
-#' @slot title
-#' Object of class \code{character}. Title of the axis.
+#' @description Extension for ValueAxis to create an axis for amSerialChart, amRadarChart,
+#' amXYChart charts, multiple can be assigned.
+#' Gets automatically populated, one for amSerialChart and two for amXYChart charts,
+#' if none has been specified.
+#' @details Run \code{api("ValueAxis")} for more information and all avalaible properties.
 #' 
-#' @slot guides
-#' Object of class \code{list}.
-#' 
-#' @slot listeners
-#' Object of class \code{"list"} containining the listeners to add to the object.
+#' @slot title \code{character}. Title of the axis.
+#' @slot guides \code{list}.
+#' @slot listeners \code{list} containining the listeners to add to the object.
 #' The list must be named as in the official API. Each element must a character string.
 #' See examples for details.
-#' 
-#' @slot otherProperties
-#' Object of class \code{"list"},
+#' @slot otherProperties \code{list},
 #' containing other avalaible properties non coded in the package yet.
-#' 
-#' @slot value
-#' Object of class \code{numeric}.
+#' @slot value \code{numeric}.
 #' Guides belonging to this axis. Use addGuide method
 #' 
 #' @export
 setClass(Class = "ValueAxis", contains = "AxisBase",
-  representation = representation(title = "character")
-)
+         representation = representation(title = "character"))
 
 #' @title Initialize
 #' @param .Object \code{\linkS4class{ValueAxis}}.
@@ -79,12 +75,12 @@ valueAxis <- function(title, ...) {
 #' setTitle(.Object = valueAxis(), title = "Hello !")
 #' @rdname initialize-ValueAxis
 setMethod(f = "setTitle", signature = c("ValueAxis", "character"),
-  definition = function(.Object, title)
-  { 
-    .Object@title <- title
-    validObject(.Object)
-    return(.Object)
-  })
+          definition = function(.Object, title)
+          { 
+            .Object@title <- title
+            validObject(.Object)
+            return(.Object)
+          })
 
 #' @examples
 #' library(pipeR)
@@ -95,11 +91,11 @@ setMethod(f = "setTitle", signature = c("ValueAxis", "character"),
 #' addGuide(fillAlpha = .4, adjustBorderColor = TRUE, gridThickness = 1) %>>% listProperties
 #' @rdname listProperties-AmObject
 setMethod(f = "listProperties", signature = "ValueAxis",
-           definition = function(.Object)
-           { 
-             ls <- callNextMethod()
-             if (length(.Object@title)) {
-               ls <- rlist::list.append(ls, title = .Object@title)
-             } else {}
-             return(ls)
-           })
+          definition = function(.Object)
+          { 
+            ls <- callNextMethod()
+            if (length(.Object@title)) {
+              ls <- rlist::list.append(ls, title = .Object@title)
+            } else {}
+            return(ls)
+          })

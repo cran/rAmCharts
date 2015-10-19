@@ -1,27 +1,21 @@
 #' @title CategoryAxis class
 #' @author DataKnowledge
-
-#' @slot gridPosition
-#'  Object of class \code{character}.
+#' @description Children class of AxisBase.
+#' Gets automatically populated if none has been specified.
+#' @details Run \code{api("CategoryAxis")} for more information and all avalaible properties.
+#' @slot gridPosition \code{character}.
 #' Specifies if a grid line is placed on the center of a cell or on the beginning of a cell.
 #' Possible values are: "start" and "middle"
 #' This setting doesn't work if parseDates is set to true.
-#' 
-#' @slot listeners
-#' Object of class \code{"list"} containining the listeners to add to the object.
+#' @slot listeners \code{list} containining the listeners to add to the object.
 #' The list must be named as in the official API. Each element must a character string.
 #' See examples for details.
-#' 
-#' @slot otherProperties
-#' Object of class \code{"list"},
+#' @slot otherProperties \code{list},
 #' containing other avalaible properties non coded in the package yet.
-#' 
-#' @slot value
-#' Object of class \code{numeric}.
-#' 
+#' @slot value \code{numeric}.
 #' @export
-setClass( Class = "CategoryAxis", contains = "AxisBase",
-  representation = representation(gridPosition = "character"))
+setClass(Class = "CategoryAxis", contains = "AxisBase",
+         representation = representation(gridPosition = "character"))
 
 #' @title Initialize a CategoryAxis
 #' @param .Object \linkS4class{CategoryAxis}.
@@ -61,19 +55,20 @@ setMethod(f = "initialize", signature = c("CategoryAxis"),
 #' @examples
 #' categoryAxis(gridPosition = "start", adjustBorderColor = TRUE)
 #' @export
-categoryAxis <- function(gridPosition, ...) {
+categoryAxis <- function(gridPosition, ...)
+{
   .Object <- new(Class="CategoryAxis")
   if (!missing(gridPosition)) {
-    .Object@gridPosition <- gridPosition
+    .Object <- setGridPosition(.Object = .Object, gridPosition = gridPosition)
   } else {}
   .Object <- setProperties(.Object, ...)
+  validObject(.Object)
   return( .Object )
 }
 
 #' @rdname initialize-CategoryAxis
 #' @export
-setGeneric(name = "setGridPosition",
-           def = function(.Object, gridPosition){ standardGeneric("setGridPosition") } )
+setGeneric(name = "setGridPosition", def = function(.Object, gridPosition){ standardGeneric("setGridPosition") } )
 #' @examples
 #' setGridPosition(.Object = categoryAxis(), gridPosition = "start")
 #' @rdname initialize-CategoryAxis
@@ -94,11 +89,11 @@ setMethod(f = "setGridPosition", signature = c("CategoryAxis", "character"),
 #' categoryAxis(ignoreAxisWidth = TRUE) %>>% setGridPosition("start") %>>% listProperties()
 #' }
 setMethod(f = "listProperties", signature = "CategoryAxis",
-           definition = function(.Object)
-           { 
-             ls <- callNextMethod()
-             if (length(.Object@gridPosition)) {
-             ls <- rlist::list.append(ls, gridPosition = .Object@gridPosition)
-             } else {}
-             return(ls)
-           })
+          definition = function(.Object)
+          { 
+            ls <- callNextMethod()
+            if (length(.Object@gridPosition)) {
+              ls <- rlist::list.append(ls, gridPosition = .Object@gridPosition)
+            } else {}
+            return(ls)
+          })

@@ -4,41 +4,62 @@
 #' 
 #' @slot listeners \code{list} containining the listeners to add to the object.
 #' The list must be named as in the official API. Each element must a character string. See examples for details.
-#' 
 #' @slot otherProperties \code{list},
-#' containing other avalaible properties non coded in the package yet.
-#' 
+#' containing other avalaible properties non coded in the class.
 #' @slot value \code{numeric}.
 #' 
 #' @export
-#' @family rAmChart classes
-setClass(
-  Class = "AmObject",
-  representation = representation(value = "numeric", listeners = "list", otherProperties = "list", "VIRTUAL") 
-)
+setClass(Class = "AmObject",
+         representation = representation(
+           value = "numeric",
+           listeners = "list",
+           otherProperties = "list", "VIRTUAL"))
 
 #' @title Visualize with show
 #' @param object \linkS4class{AmObject}
 #' @examples
-#' show(amSerialChart())
+#' pipeR::pipeline(
+#'   rAmCharts::amPieChart(valueField = "value", titleField = "key", creditsPosition = "top-right",
+#'                         backgroundColor = "#7870E8"),
+#'   rAmCharts::setDataProvider(data.frame(key = c("FR", "US"), value = c(20,10))),
+#'   rAmCharts::setExport(position = "bottom-left")
+#' )
 #' @family Visualizations
 #' @export
 setMethod(f = "show", signature = "AmObject",
           definition = function(object)
           {
+            # message("call show method for 'AmObject'")
             cat("~", class(object),"~\n")
             print(listProperties(object))
           })
 
 #' @title Visualize with print
-#' @param x \linkS4class{AmChart}
+#' @param x \linkS4class{AmChart}.
+#' @param withDetail \code{logical}. Should the detail be printed ?
 #' @param ... Other properties.
 #' @examples
-#' print(new("AmChart", categoryField = "variables"))
+#' print(new("AmChart", categoryField = "variables", type = "serial"))
+#' print(new("AmChart", categoryField = "variables", type = "serial"), withDetail = FALSE)
 #' @family Visualizations
 #' @export
 setMethod(f = "print", signature = "AmObject",
-          definition = function(x, ...) {print(listProperties(x))})
+          definition = function(x, withDetail = TRUE,...) {
+            if (withDetail) {
+              cat("~ ", class(x)," object (with detail)~\n\n")
+              cat("Referenced properties:\n")
+              ls <- listProperties(x)
+              cat(paste(names(ls), collapse = ", "), "\n\n")
+              cat("   - Detail:\n")
+              print(ls)
+            } else {
+              cat("~ ", class(x)," object (without detail)~\n\n")
+              cat("Referenced properties:\n")
+              ls <- listProperties(x)
+              cat(paste(names(ls), collapse = ", "))
+            }
+            cat("\n")
+          })
 
 # > @listeners: setters ####
 

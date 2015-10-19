@@ -7,11 +7,12 @@
 renderAmCharts(expr, env, quoted)
 }
 \arguments{
-\item{expr}{\code{expression}.}
+\item{expr}{an expression that generates an HTML widget.}
 
-\item{env}{see htmlwidgets doc}
+\item{env}{the environment in which to evaluate expr.}
 
-\item{quoted}{\code{logical}.}
+\item{quoted}{is expr a quoted expression (with quote())?
+This is useful if you want to save an expression in a variable.}
 }
 \description{
 Widget output function for use in Shiny

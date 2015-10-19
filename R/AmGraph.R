@@ -3,36 +3,24 @@ NULL
 
 #' @title AmGraph class
 #' @author DataKnowledge
-#' @description This class represents data for a serial chart
-#' 
+#' @description Creates the visualization of the data in following types:
+#' line, column, step line, smoothed line, olhc and candlestick.
+#' @details Run \code{api("AmGraph")} for more details and all avalaible properties.
 #' @slot balloonText  \code{character}.
 #' Balloon text. You can use tags like [[value]], [[description]], [[percents]], [[open]], [[category]]
 #' or any other field name from your data provider. HTML tags can also be used.
-#' 
 #' @slot title \code{character}. Graph title.
-#' 
-#' @slot type \code{character}
+#' @slot type \code{character}.
 #' Type of the graph. Possible values are: "line", "column", "step", "smoothedLine", "candlestick", "ohlc".
 #' XY and Radar charts can only display "line" otherArguments graphs.
-#' 
 #' @slot valueField \code{character}.
 #' Name of the value field in your dataProvider.
-#' 
 #' @slot listeners \code{"list"} containining the listeners to add to the object.
-#' The list must be named as in the official API. Each element must a character string. See examples for details.
-#' 
+#' The list must be named as in the official API. Each element must a character string.
+#' See examples for details.
 #' @slot otherProperties \code{"list"},
 #' containing other avalaible properties non coded in the package yet
-#' 
 #' @slot value \code{numeric}.
-#' 
-#' @examples
-#' \dontrun{
-#' new("AmGraph")
-#' unclass(new("AmGraph"))
-#' }
-#' @family rAmChart classes
-#' @rdname AmGraph-class
 #' @export
 setClass (Class = "AmGraph", contains = "AmObject",
   representation = representation(
@@ -59,7 +47,8 @@ setClass (Class = "AmGraph", contains = "AmObject",
   })
 
 #' @title Initialize an AmGraph
-#' @description To create an AmGraph, you can use the usual methode Initialize or the constructor.
+#' @description To create an AmGraph, you can use the usual methode
+#' Initialize or the constructor.
 #' You can update properties with setters.
 #' @param .Object \linkS4class{AmGraph}.
 #' @param animationPlayed \code{logical}.
@@ -106,6 +95,32 @@ setMethod(f = "initialize", signature = "AmGraph",
 #' @describeIn initialize-AmGraph
 #' @export
 amGraph <- function(animationPlayed = FALSE, balloonText, title, type, valueField, ...)
+{
+  .Object <- new(Class="AmGraph", animationPlayed = animationPlayed)
+  if (!missing(balloonText)) {
+    .Object@balloonText <- balloonText
+  } else {}
+  if (!missing(title)) {
+    .Object@title <- title
+  } else {}
+  if (!missing(type)) {
+    .Object@type <- type
+  } else {}
+  if (!missing(valueField)) {
+    .Object@valueField <- valueField
+  } else {}
+  .Object@otherProperties <- list(...)
+  validObject(.Object)
+  return(.Object)
+}
+
+#' @description Constructor (shortcut)
+#' @examples
+#' graph(balloonText = "balloonText", "type" = "column",
+#'       valueField = "value", animationPlayed = TRUE)
+#' @describeIn initialize-AmGraph
+#' @export
+graph <- function(animationPlayed = FALSE, balloonText, title, type, valueField, ...)
 {
   .Object <- new(Class="AmGraph", animationPlayed = animationPlayed)
   if (!missing(balloonText)) {

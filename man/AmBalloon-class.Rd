@@ -5,7 +5,12 @@
 \alias{AmBalloon-class}
 \title{AmBalloon class}
 \description{
-AmBalloon class
+Creates the balloons (tooltips) of the chart.
+It follows the mouse cursor when you roll-over the data items.
+The framework generates the instances automatically you only need to adjust the appearance to your needs.
+}
+\details{
+Run \code{api("AmBalloon")} for more information and all avalaible properties.
 }
 \section{Slots}{
 
@@ -24,12 +29,12 @@ Balloon corner radius.}
 Balloon background color. Usually balloon background color is set by the chart.
 Only if "adjustBorderColor" is "true" this color will be used.}
 
-\item{\code{listeners}}{\code{"list"} containining the listeners to add to the object.
+\item{\code{listeners}}{\code{list} containining the listeners to add to the object.
 The list must be named as in the official API. Each element must a character string.
 See examples for details.
 Inherited from \code{\linkS4class{AmObject}}.}
 
-\item{\code{otherProperties}}{\code{"list"},
+\item{\code{otherProperties}}{\code{list},
 containing other avalaible properties non coded in the package yet.
 Inherited from \code{\linkS4class{AmObject}}.}
 
@@ -38,9 +43,5 @@ Inherited from \code{\linkS4class{AmObject}}.}
 }}
 \author{
 DataKnowledge
-}
-\seealso{
-Other rAmChart classes: \code{\link{AmChart-class}};
-  \code{\link{AmGraph-class}}; \code{\link{AmObject-class}}
 }
 
