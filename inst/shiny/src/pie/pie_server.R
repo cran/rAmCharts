@@ -1,18 +1,28 @@
 output$pie0 <- rAmCharts::renderAmCharts({
-  pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country',
-               dataProvider = data_gdp, startDuration = 0),
-    setProperties(theme = input$theme_pie)
-  )
+  ## Data
+  data('data_gdp')
+  ## Plot
+  amPieChart(valueField = 'gdp', titleField = 'country',
+             dataProvider = data_gdp, startDuration = 0)
 })
 
 output$code_pie0 <- renderText({
   "
-  amPieChart(valueField = 'gdp', titleField = 'country', dataProvider = data_gdp)
-  "
+  ## Data
+  data('data_gdp')
+  ## Plot
+  amPieChart(valueField = 'gdp', titleField = 'country',
+             dataProvider = data_gdp, startDuration = 0)
+"
 })
 
+
+
+
 output$pie01 <- rAmCharts::renderAmCharts({
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
     amPieChart(valueField = 'gdp', titleField = 'country',
                dataProvider = data_gdp, startDuration = 0),
@@ -23,8 +33,12 @@ output$pie01 <- rAmCharts::renderAmCharts({
 
 output$code_pie01 <- renderText({
   "
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country', dataProvider = data_gdp),
+    amPieChart(valueField = 'gdp', titleField = 'country',
+               dataProvider = data_gdp, startDuration = 0),
     addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
     addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue')
   )
@@ -32,9 +46,12 @@ output$code_pie01 <- renderText({
 })
 
 output$pie03 <- rAmCharts::renderAmCharts({
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
     amPieChart(valueField = 'gdp', titleField = 'country', startDuration = 0,
-               dataProvider = data_gdp, theme = 'dark'),
+               dataProvider = data_gdp, theme = 'dark', export=list(enabled = TRUE)),
     addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
     addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
     setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE)
@@ -43,8 +60,12 @@ output$pie03 <- rAmCharts::renderAmCharts({
 
 output$code_pie03 <- renderText({
   "
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country', dataProvider = data_gdp, theme = 'dark'),
+    amPieChart(valueField = 'gdp', titleField = 'country', startDuration = 0,
+               dataProvider = data_gdp, theme = 'dark', export=list(enabled = TRUE)),
     addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
     addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
     setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE)
@@ -53,6 +74,9 @@ output$code_pie03 <- renderText({
 })
 
 output$pie04 <- rAmCharts::renderAmCharts({
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
     amPieChart(valueField = 'gdp', titleField = 'country', startDuration = 0,
                dataProvider = data_gdp, theme = 'light'),
@@ -66,6 +90,9 @@ output$pie04 <- rAmCharts::renderAmCharts({
 
 output$code_pie04 <- renderText({
   "
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
     amPieChart(valueField = 'gdp', titleField = 'country', startDuration = 0,
                dataProvider = data_gdp, theme = 'light'),
@@ -79,9 +106,12 @@ output$code_pie04 <- renderText({
 })
 
 output$pie05 <- rAmCharts::renderAmCharts({
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
     amPieChart(valueField = 'gdp', titleField = 'country', startDuration = 0,
-               dataProvider = data_gdp, theme = 'patterns'),
+               dataProvider = data_gdp),
     addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
     addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
     setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE),
@@ -91,8 +121,12 @@ output$pie05 <- rAmCharts::renderAmCharts({
 
 output$code_pie05 <- renderText({
   "
+  ## Data
+  data('data_gdp')
+  ## Plot
   pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country', dataProvider = data_gdp, theme = 'patterns'),
+    amPieChart(valueField = 'gdp', titleField = 'country', startDuration = 0,
+               dataProvider = data_gdp),
     addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
     addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
     setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE),
@@ -101,49 +135,4 @@ output$code_pie05 <- renderText({
   "
 })
 
-output$pie06 <- rAmCharts::renderAmCharts({
-  pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country', angle = input$angle_pie,
-               dataProvider = data_gdp, startDuration = 0, innerRadius = input$innerRadius_pie,
-               theme = 'default', outlineAlpha = .4, depth3D = input$depth_pie, angle = 30),
-    addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
-    addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
-    setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE)
-  )
-})
-
-output$code_pie06 <- renderText({
-  "
-  pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country', dataProvider = data_gdp,
-               theme = 'default', outlineAlpha = .4, depth3D = 15, angle = 30),
-    addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
-    addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
-    setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE)
-  )
-  "
-})
-
-output$pie07 <- rAmCharts::renderAmCharts({
-  pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country',
-               dataProvider = data_gdp, startDuration = 0,
-               labelRadius = 5, radius = '30%', innerRadius = '50%'),
-    addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
-    addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
-    setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE)
-  )
-})
-
-output$code_pie07 <- renderText({
-  "
-  pipeR::pipeline(
-    amPieChart(valueField = 'gdp', titleField = 'country', dataProvider = data_gdp,
-               labelRadius = 5, radius = '30%', innerRadius = '50%'),
-    addTitle(text = '10 Richest Countries in the World by 2015 GDP'),
-    addTitle(text = 'data from http://www.insidermonkey.com', size = 10, color = 'blue'),
-    setLegend(markerType = 'circle', position = 'right', marginRight = 80, autoMargins = FALSE)
-  )
-  "
-})
 
