@@ -1,0 +1,18 @@
+amcharts_version : "3.18.2"
+styles:
+  amstockcharts:
+    name: "amstockcharts_style"
+    script: "style.css"
+plugins:
+  responsive:
+    name: "amcharts_responsive"
+    script: "responsive.min.js"
+  dataloader:
+    name: "amcharts_dataloader"
+    script: "dataloader.min.js"
+  export:
+    name: "amcharts_export"
+    script: "export.min.js"
+    stylesheet: "export.css"
+    
+    

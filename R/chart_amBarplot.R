@@ -34,7 +34,7 @@
 #' fff - milliseconds, ss - seconds, mm - minutes, hh - hours, DD - days, MM - months, YYYY - years.
 #' It's also possible to supply a number for increments, i.e. '15mm'
 #' which will instruct the chart that your data is supplied in 15 minute increments.
-#' @param ... see \code{\link{amOptions}} for more options.
+#' @param ... see \link{amOptions} for more options.
 #' 
 #' @return An object of class \linkS4class{AmChart}.
 #' 
@@ -53,7 +53,10 @@
 #' 
 #' amBarplot(x = "country", y = "visits", data = data_bar)
 #' amBarplot(x = "year", y = c("income", "expenses"), data = data_gbar)
-#' 
+#' \dontrun{
+#' # shortcut
+#' amBarplot(x = "year", y = c("inc", "exp"), data = data_gbar)
+#' }
 #' \donttest{
 #' 
 #' # Other examples available which can be time consuming depending on your configuration.
@@ -105,8 +108,7 @@
 #' 
 #' 
 #' # Round values
-#' amBarplot(x = "year", y = c("income", "expenses"), data = data_gbar) %>>%
-#'   setProperties(precision = 0)
+#' amBarplot(x = "year", y = c("in", "ex"), data = data_gbar, precision = 0)
 #' }
 #' 
 #' @seealso 
@@ -140,15 +142,13 @@ amBarplot <- function(x, y, data, xlab = "", ylab = "", groups_color = NULL,hori
   # convert x into character if necessary
   if (is.numeric(x)) x <- colnames(data)[x]
   # check if the column is compatible
-  if(is.factor(data[,x])) {
+  if (is.factor(data[,x])) {
     data[,x] <- as.character(data[,x])
   }
   .testCharacter(char = data[,x])
   
   # check argument y
-  if (is.character(y))
-    .testIn(vect = y, control = colnames(data))
-  
+  y <- match.arg(arg = y, choices = colnames(data), several.ok = TRUE)
   
   sapply(1:length(y), FUN = function(i) {
     if (is.numeric(y[i])) {
