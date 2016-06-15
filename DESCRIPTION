@@ -14,7 +14,7 @@ Description: API for using 'AmCharts' Library. Based on the 'htmlwidgets'
     licence, and thus support its creators and get a period of Priority Support.
     See also <http://www.amcharts.com/about/> for more information about 'AmCharts'
     company.
-Version: 2.0.2
+Version: 2.0.3
 Authors@R: c(
     person(given = "Jeffery", family = "Petit", email = "jeffery.petit@datastorm.fr", role = c("aut", "cre")),
     person(given = "Antanas", family = " Marcelionis", role = c("aut", "cph"),
@@ -22,7 +22,7 @@ Authors@R: c(
     person(given = "Benoit", family = "Thieurmel", email = "benoit.thieurmel@datastorm.fr", role = c("aut", "ctb")),
     person(given = "Elena", family = "Salette", email = "elena.salette@datastorm.fr", role = c("aut", "ctb")),
     person(given = "Titouan", family = "Robert", email = "titouan.robert@datastorm.fr", role = c("aut", "ctb")))
-Date: 2016-03-14
+Date: 2016-06-15
 License: GPL (>= 2)
 URL: http://datastorm-open.github.io/introduction_ramcharts/
 BugReports: https://github.com/datastorm-open/rAmCharts/issues/
@@ -32,10 +32,11 @@ Collate: 'base_data.R' 'base_startupMessage.R' 'chart_amBarplot.R'
         'chart_amFloatingBar.R' 'chart_amFunnel.R' 'chart_amGauge.R'
         'chart_amHist.R' 'chart_amMekko.R' 'chart_amOHLC.R'
         'chart_amPie.R' 'chart_amPlot.R' 'chart_amRadar.R'
-        'chart_amWaterfall.R' 'chart_amWind.R' 'utils_sharedGenerics.R'
-        'class_AmObject.R' 'class_AxisBase.R' 'class_ValueAxis.R'
-        'utils_basicClassUnions.R' 'class_TrendLine.R' 'class_Title.R'
-        'class_AmChart.R' 'class_StockPanel.R' 'class_StockEvent.R'
+        'chart_amTimeSeries.R' 'chart_amWaterfall.R' 'chart_amWind.R'
+        'utils_sharedGenerics.R' 'class_AmObject.R' 'class_AxisBase.R'
+        'class_ValueAxis.R' 'utils_basicClassUnions.R'
+        'class_TrendLine.R' 'class_Title.R' 'class_AmChart.R'
+        'class_StockPanel.R' 'class_StockEvent.R'
         'class_PeriodSelector.R' 'class_Label.R' 'class_Guide.R'
         'class_GaugeAxis.R' 'class_GaugeBand.R' 'class_GaugeArrow.R'
         'class_DataSet.R' 'class_ChartScrollbar.R'
@@ -57,7 +58,7 @@ Imports: methods, htmlwidgets, htmltools, rlist, data.table (>= 1.9.6),
 Suggests: magrittr, shiny, testthat, shinydashboard
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-05-11 09:13:36 UTC; Jeff
+Packaged: 2016-06-15 14:48:25 UTC; Jeff
 Author: Jeffery Petit [aut, cre],
   Antanas Marcelionis [aut, cph] ('AmCharts' library in th directory
     htmlwidgets/lib/amcharts, refer to http://www.amcharts.com/),
@@ -66,4 +67,4 @@ Author: Jeffery Petit [aut, cre],
   Titouan Robert [aut, ctb]
 Maintainer: Jeffery Petit <jeffery.petit@datastorm.fr>
 Repository: CRAN
-Date/Publication: 2016-05-11 12:10:39
+Date/Publication: 2016-06-15 17:30:53

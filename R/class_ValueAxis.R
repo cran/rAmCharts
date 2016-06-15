@@ -52,12 +52,8 @@ setClass(Class = "ValueAxis", contains = "AxisBase",
 setMethod(f = "initialize", signature = c("ValueAxis"),
           definition = function(.Object, title, guides, ...)
           {            
-            if (!missing(title)) {
-              .Object@title <- title
-            } else {}
-            if (!missing(guides) && is.list(guides)) {
-              .Object@guides <- lapply(guides, listProperties)
-            } else {}
+            if (!missing(title)) .Object@title <- title
+            if (!missing(guides) && is.list(guides)) .Object@guides <- lapply(guides, listProperties)
             .Object <- setProperties(.Object, ...)
             validObject(.Object)
             return(.Object)
@@ -72,12 +68,10 @@ setMethod(f = "initialize", signature = c("ValueAxis"),
 #' 
 #' @export
 #' 
-valueAxis <- function(title, ...) {
-  .Object <- new(Class="ValueAxis")
-  if (!missing(title)) {
-    .Object@title <- title
-  } else {}
-  .Object <- setProperties(.Object, ...)
+valueAxis <- function(...)
+{
+  .Object <- new("ValueAxis", ...)
+  validObject(.Object)
   return(.Object)
 }
 
@@ -96,24 +90,3 @@ setMethod(f = "setTitle", signature = c("ValueAxis", "character"),
             return(.Object)
           })
 
-#' @rdname listProperties-AmObject
-#' 
-#' @examples
-#' library(pipeR)
-#' \dontshow{
-#' valueAxis(axisTitleOffset = 12, tickLength = 10) %>>% listProperties %>>% class
-#' }
-#' valueAxis(axisTitleOffset = 12, tickLength = 10, axisTitleOffset = 12) %>>%
-#' addGuide(fillAlpha = .4, adjustBorderColor = TRUE, gridThickness = 1) %>>% listProperties
-#' 
-#' @export
-#' 
-setMethod(f = "listProperties", signature = "ValueAxis",
-          definition = function(.Object)
-          { 
-            ls <- callNextMethod()
-            if (length(.Object@title)) {
-              ls <- rlist::list.append(ls, title = .Object@title)
-            } else {}
-            return(ls)
-          })

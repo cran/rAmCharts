@@ -205,7 +205,7 @@ setClass(Class = "AmChart", contains = "AmObject",
 #' @return (updated) \linkS4class{AmChart} with given properties.
 #' 
 #' @examples
-#' new("AmChart", valueField = "value")
+#' new("AmChart", valueField = "value", theme = "patterns")
 #' 
 #' @seealso Refer to \url{http://docs.amcharts.com/3/javascriptcharts/}.
 #' @rdname initialize-AmChart
@@ -239,85 +239,8 @@ setMethod(f = "initialize", signature = "AmChart",
             if (!missing(valueAxes)) .Object <- setValueAxes(.Object, valueAxes)
             if (!missing(valueAxis)) .Object <- setValueAxis(.Object, valueAxis)
             
+            .Object@otherProperties <- list(...)
+            
             validObject(.Object)
             return(.Object)
-          })
-
-#' @rdname listProperties-AmObject
-#' @examples
-#' # --- signature 'AmChart'
-#' listProperties(amChart(test = 1))
-#'
-#' 
-setMethod(f = "listProperties", signature = "AmChart",
-          definition = function(.Object)
-          {
-            ls <- callNextMethod()
-            if (length(.Object@allLabels)) {
-              ls <- rlist::list.append(ls, allLabels = .Object@allLabels)
-            } else {}
-            if (length(.Object@arrows)) {
-              ls <- rlist::list.append(ls, arrows = .Object@arrows)
-            } else {}
-            if (length(.Object@axes)) {
-              ls <- rlist::list.append(ls, axes = .Object@axes)
-            } else {}
-            if (length(.Object@balloon)) {
-              ls <- rlist::list.append(ls, balloon = .Object@balloon)
-            } else {}
-            if (length(.Object@categoryAxis)) {
-              ls <- rlist::list.append(ls, categoryAxis = .Object@categoryAxis)
-            } else {}
-            if (length(.Object@categoryField)) {
-              ls <- rlist::list.append(ls, categoryField = .Object@categoryField)
-            } else {}
-            if (length(.Object@creditsPosition)) {
-              ls <- rlist::list.append(ls, creditsPosition = .Object@creditsPosition)
-            } else {}
-            if (length(.Object@chartCursor)) {
-              ls <- rlist::list.append(ls, chartCursor = .Object@chartCursor)
-            } else {}
-            if (length(.Object@chartScrollbar)) {
-              ls <- rlist::list.append(ls, chartScrollbar = .Object@chartScrollbar)
-            } else {}
-            if (length(.Object@dataProvider)) {
-              ls <- rlist::list.append(ls, dataProvider = .Object@dataProvider)
-            } else {}
-            if (length(.Object@graphs)) {
-              ls <- rlist::list.append(ls, graphs = .Object@graphs)
-            } else {}
-            if (length(.Object@graph)) {
-              ls <- rlist::list.append(ls, graph = .Object@graph)
-            } else {}
-            if (length(.Object@guides)) {
-              ls <- rlist::list.append(ls, guides = .Object@guides)
-            } else {}
-            if (length(.Object@legend)) {
-              ls <- rlist::list.append(ls, legend = .Object@legend)
-            } else {}
-            if (length(.Object@segmentsField)) {
-              ls <- rlist::list.append(ls, segmentsField = .Object@segmentsField)
-            } else {}
-            if (length(.Object@subChartProperties)) {
-              ls <- rlist::list.append(ls, subChartProperties = .Object@subChartProperties)
-            } else {}
-            if (length(.Object@theme)) {
-              ls <- rlist::list.append(ls, theme = .Object@theme)
-            } else {}
-            if (length(.Object@titles)) {
-              ls <- rlist::list.append(ls, titles = .Object@titles)
-            } else {}
-            if (length(.Object@trendLines)) {
-              ls <- rlist::list.append(ls, trendLines = .Object@trendLines)
-            } else {}
-            if (length(.Object@type)) {
-              ls <- rlist::list.append(ls, type = .Object@type)
-            } else {}
-            if (length(.Object@valueAxes)) {
-              ls <- rlist::list.append(ls, valueAxes = .Object@valueAxes)
-            } else {}
-            if (length(.Object@valueAxis)) {
-              ls <- rlist::list.append(ls, valueAxis = .Object@valueAxis)
-            } else {}
-            return(ls)
           })

@@ -101,58 +101,11 @@ setMethod(f = "initialize", signature = "TrendLine",
 #' @examples
 #' trendLine(initialValue = 1, finalValue = 11)
 #' @export
-trendLine <- function(.Object,
-                      initialValue, initialXValue,
-                      finalValue, finalXValue,
-                      valueAxis, valueAxisX, ...) {
-  .Object <- new("TrendLine")
-  if (!missing(initialValue)) {
-    .Object@initialValue <- initialValue
-  } else {}
-  if (!missing(initialXValue)) {
-    .Object@initialXValue <- initialXValue
-  } else {}
-  if (!missing(finalValue)) {
-    .Object@finalValue <- finalValue
-  } else {}
-  if (!missing(finalXValue)) {
-    .Object@finalXValue <- finalXValue
-  } else {}
-  if (!missing(valueAxis)) {
-    .Object <- setValueAxis(.Object, valueAxis)
-  } else {}
-  if (!missing(valueAxisX)) {
-    .Object <- setValueAxisX(.Object, valueAxisX)
-  } else {}
-  .Object <- setProperties(.Object, ...)
+trendLine <- function(.Object, initialValue, initialXValue, finalValue,
+                      finalXValue, valueAxis, valueAxisX, ...)
+{
+  .Object <- new(Class = "TrendLine", initialValue = initialValue, initialXValue = initialXValue, finalValue = finalValue,
+                 finalXValue = finalXValue, valueAxis = valueAxis, valueAxisX = valueAxisX, ...)
   validObject(.Object)
   return(.Object)
 }
-
-#' @examples
-#' trendLine(initialValue = 1, valueAxis = valueAxis(axisTitleOffset = 12, tickLength = 10))
-#' @rdname listProperties-AmObject
-setMethod(f = "listProperties", signature = "TrendLine",
-           definition = function(.Object)
-           { 
-             ls <- callNextMethod()
-             if (length(.Object@initialValue)) {
-               ls <- rlist::list.append(ls, initialValue = .Object@initialValue)
-             } else {}
-             if (length(.Object@initialXValue)) {
-               ls <- rlist::list.append(ls, initialXValue = .Object@initialXValue)
-             } else {}
-             if (length(.Object@finalValue)) {
-               ls <- rlist::list.append(ls, finalValue = .Object@finalValue)
-             } else {}
-             if (length(.Object@initialXValue)) {
-               ls <- rlist::list.append(ls, finalXValue = .Object@finalXValue)
-             } else {}
-             if (length(.Object@valueAxis)) {
-               ls <- rlist::list.append(ls, valueAxis = .Object@valueAxis)
-             } else {}
-             if (length(.Object@valueAxisX)) {
-               ls <- rlist::list.append(ls, valueAxisX = .Object@valueAxisX)
-             } else {}
-             return(ls)
-           })

@@ -53,17 +53,14 @@ setMethod(f = "initialize", signature = "Title",
 # CONSTRUCTOR ####
 #' @rdname Title
 #' @examples
-#' title(text = "bonjour")
+#' title(text = "Main", size = 10)
+#' title(text = "Main", bold = TRUE)
 #' @export
 title <- function(text, size, ...) {
-  .Object <- new("Title")
-  if (!missing(text)) {
-    .Object@text <- text
-  }
-  if (!missing(size)) {
-    .Object@size <- size
-  }
-  .Object <- setProperties(.Object, ...)
+  .Object <- new("Title", ...)
+  if (!missing(text)) .Object@text <- text
+  if (!missing(size)) .Object@size <- size
+
   validObject(.Object)
   return(.Object)
 }
@@ -96,20 +93,4 @@ setMethod(f = "setSize", signature = c("Title", "numeric"),
             .Object@size <- size
             validObject(.Object)
             return(.Object)
-          })
-
-#' @examples
-#' title(text = "foo")
-#' @rdname listProperties-AmObject
-setMethod(f = "listProperties", signature = "Title",
-          definition = function(.Object)
-          { 
-            ls <- callNextMethod()
-            if (length(.Object@text)) {
-              ls <- rlist::list.append(ls, text = .Object@text)
-            } else{}
-            if (length(.Object@size)) {
-              ls <- rlist::list.append(ls, size = .Object@size)
-            } else{}
-            return(ls)
           })

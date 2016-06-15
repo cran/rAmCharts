@@ -187,10 +187,9 @@ setMethod(f = "initialize", signature = "StockPanel",
 #' @examples
 #' stockPanel(stockLegend = legend(useGraphSettings = TRUE))
 #' @export
-stockPanel <- function(drawOnAxis, stockGraphs, stockLegend, ...)
+stockPanel <- function(...)
 {
-  list_call <- c(list(Class = "StockPanel"), as.list(match.call())[-1])
-  .Object <- do.call(what = "new", list_call)
+  .Object <- new(Class = "StockPanel", ...)
   validObject(.Object)
   return(.Object)
 }
@@ -200,21 +199,7 @@ stockPanel <- function(drawOnAxis, stockGraphs, stockLegend, ...)
 #' panel(creditsPosition = "top-right")
 #' panel(title = "top-right")
 #' @export
-panel <- function(drawOnAxis, stockGraphs, stockLegend, ...)
+panel <- function(...)
 {
-  do.call(what = "stockPanel", as.list(match.call())[-1])
+  new(Class = "StockPanel", ...)
 }
-
-#' @examples
-#' stockPanel(drawnOnAxis = "axis1") 
-#' @rdname listProperties-AmObject
-setMethod(f = "listProperties", signature = "StockPanel",
-          definition = function(.Object)
-          { 
-            ls <- callNextMethod()
-            if (length(.Object@drawOnAxis)) ls$drawOnAxis <- .Object@drawOnAxis
-            if (length(.Object@stockGraphs)) ls$stockGraphs <- .Object@stockGraphs
-            if (length(.Object@stockLegend)) ls$stockLegend <- .Object@stockLegend
-            if (length(.Object@title)) ls$title <- .Object@title
-            return(ls)
-          })
