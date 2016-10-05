@@ -18,7 +18,7 @@
 #' for example - you have 250 days in the selection,
 #' and maxSeries is 150 - the chart will group data to weeks.
 #' @param groupToPeriods \code{character}, Periods to which data will
-#' be gruoped in case there are more data items in the selected
+#' be grouped in case there are more data items in the selected
 #' period than specified in maxSeries property. Possible value are :
 #' 'ss', 'mm', 'hh', 'DD', 'MM', 'YYYY'. It's also possible to add multiple like "30mm".
 #' @param ZoomButtonPosition \code{character}, zoom button position. Possible values are :
@@ -287,7 +287,7 @@ amTimeSeries <- function(data, col_date,
                            cursorAlpha = 0.1, valueLineBalloonEnabled = TRUE,
                            valueLineEnabled = TRUE, valueLineAlpha = 0.5,
                            categoryBalloonDateFormats = mycategoryBalloonDateFormat),
-    setPeriodSelector(periodZoom, inputFieldsEnabled = FALSE),
+    setPeriodSelector(periodZoom),
     setCategoryAxesSettings(parseDates = TRUE, minPeriod = 'fff',
                             groupToPeriods = groupToPeriods, maxSeries = maxSeries),
     setPanelsSettings(marginTop = 30, creditsPosition = creditsPosition),

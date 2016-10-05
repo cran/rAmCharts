@@ -73,12 +73,14 @@
 \alias{setValueAxes}
 \alias{setValueAxes,AmChart,list-method}
 \alias{setValueAxis,AmChart,ValueAxisOrMissing-method}
+\alias{setValueScrollbar}
+\alias{setValueScrollbar,AmChart,ChartScrollbarOrMissing-method}
 \title{Creates an AmChart}
 \usage{
 \S4method{initialize}{AmChart}(.Object, allLabels, arrows, axes, balloon,
   categoryAxis, categoryField, chartCursor, chartScrollbar, creditsPosition,
   dataProvider, graphs, graph, guides, legend, segmentsField, theme, titles,
-  trendLines, type, valueAxes, valueAxis, ...)
+  trendLines, type, valueAxes, valueAxis, valueScrollbar, ...)
 
 amChart(allLabels, arrows, axes, balloon, categoryAxis, categoryField,
   chartCursor, chartScrollbar, creditsPosition, dataProvider, graph, graphs,
@@ -234,6 +236,11 @@ addValueAxis(.Object, valueAxis = NULL, ...)
 
 \S4method{setValueAxis}{AmChart,ValueAxisOrMissing}(.Object, valueAxis = NULL,
   ...)
+
+setValueScrollbar(.Object, valueScrollbar, ...)
+
+\S4method{setValueScrollbar}{AmChart,ChartScrollbarOrMissing}(.Object,
+  valueScrollbar, ...)
 }
 \arguments{
 \item{.Object}{\linkS4class{AmChart}.}
@@ -333,6 +340,9 @@ Run \code{api("ValueAxis")} for more informations.}
 Only valid for Gantt Charts.
 Set it's type to "date" if your data is date or time based.
 Run \code{api("ValueAxis")} for more informations.}
+
+\item{valueScrollbar}{\linkS4class{ChartScrollbar}.
+Value scrollbar, enables scrolling value axes.}
 
 \item{...}{In case of constructor \code{new("AmChart")} or \code{amChart()}
 Dots represent other properties to set to the \linkS4class{AmChart} object.
@@ -471,7 +481,7 @@ amAngularGaugeChart(arrows = arrows_ls)
 }
 # ---
 \donttest{
-addArrow(.Object = amAngularGaugeChart(), value = 10)
+chart <- addArrow(.Object = amAngularGaugeChart(), value = 10); print(chart)
 # equivalent to:
 gaugeArrow_obj <- gaugeArrow(value = 10)
 addArrow(.Object = amAngularGaugeChart(), arrow = gaugeArrow_obj)
@@ -565,11 +575,13 @@ guides_ls <- list(guide(fillAlpha = .1), guide(fillAlpha = .5))
 amSerialChart(guides = guides_ls)
 }
 # ---
-addGuide(.Object = amSerialChart(), fillAlpha = .1, value = 0, toVAlue = 10)
+\donttest{
+chart <- addGuide(.Object = amSerialChart(), fillAlpha = .1, value = 0, toVAlue = 10)
+print(chart)
 # equivalent to
 guide_obj <- guide(fillAlpha = .1, value = 0, toValue = 10, valueAxis = "1")
 addGuide(.Object = amSerialChart(), guide = guide_obj)
-# ---
+}
 \donttest{
 setLegend(.Object = amChart(), amLegend = amLegend(useGraphSettings = TRUE))
 # equivalent to:
@@ -607,7 +619,7 @@ setTheme(.Object = amPieChart(), theme = "dark")
 }
 # ---
 \donttest{
-titles_ls <- list(title(text = "balloonText"), title(text = "column"))
+titles_ls <- list(amTitle(text = "balloonText"), amTitle(text = "column"))
 setTitles(.Object = amXYChart(), titles = titles_ls)
 # or...
 amXYChart(titles = titles_ls)
@@ -616,7 +628,7 @@ amXYChart(titles = titles_ls)
 \donttest{
 addTitle(.Object = amPieChart(), text = "balloonText", size = 15)
 # equivalent to
-title_obj <- title(text = "balloonText", size = 15)
+title_obj <- amTitle(text = "balloonText", size = 15)
 addTitle(.Object = amPieChart(), title = title_obj)
 }
 # ---
@@ -633,7 +645,7 @@ addTrendLine(.Object = amSerialChart(), initialValue = 1, initialXValue = 1,
              finalValue = 11, finalXValue = 12)
 # equivalent to:
 trendLine_obj <- trendLine(initialValue = 1, initialXValue = 1, finalValue = 11, finalXValue = 12)
-addTrendLine(.Object = amSerialChart(), trendLine = trendLine_obj)
+chart <- addTrendLine(.Object = amSerialChart(), trendLine = trendLine_obj); print(chart)
 }
 # ---
 \donttest{
@@ -660,6 +672,14 @@ addValueAxis(.Object = amSerialChart(), valueAxis = valueAxis_obj)
 setValueAxis(.Object = amGanttChart())
 setValueAxis(.Object = amGanttChart(), type = "date")
 }
+\donttest{
+valueScrollbar_obj <- chartScrollbar(updateOnReleaseOnly = FALSE)
+chart <- setValueScrollbar(.Object = amSerialChart(), valueScrollbar = valueScrollbar_obj)
+print(chart)
+# or...
+amSerialChart(updateOnReleaseOnly = FALSE)
+}
+# ---
 }
 \seealso{
 Refer to \url{http://docs.amcharts.com/3/javascriptcharts/}.

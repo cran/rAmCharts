@@ -18,7 +18,7 @@
 \S4method{initialize}{StockPanel}(.Object, allLabels, axes, balloon,
   categoryAxis, categoryField, chartCursor, chartScrollbar, creditsPosition,
   dataProvider, graphs, graph, guides, legend, theme, title, titles, trendLines,
-  type, valueAxes, drawOnAxis, stockGraphs, stockLegend, ...)
+  type, valueAxes, valueScrollbar, drawOnAxis, stockGraphs, stockLegend, ...)
 
 stockPanel(...)
 
@@ -132,6 +132,9 @@ Chart creates one value axis automatically,
 so if you need only one value axis, you don't need to create it.
 Run \code{api("ValueAxis")} for more informations.}
 
+\item{valueScrollbar}{\linkS4class{ChartScrollbar}.
+Value scrollbar, enables scrolling value axes.}
+
 \item{drawOnAxis}{\linkS4class{ValueAxis}.
 Specifies on which value axis user can draw trend lines.
 Set drawingIconsEnabled to true if you want drawing icons to be visible.
@@ -161,7 +164,7 @@ or update an existing one with the setters.
 \examples{
 new("StockPanel", title = "Volume")
 
-stockPanel(stockLegend = legend(useGraphSettings = TRUE))
+stockPanel(stockLegend = amLegend(useGraphSettings = TRUE))
 panel(creditsPosition = "top-right")
 panel(title = "top-right")
 valueAxis_obj <- valueAxis(id = "valueAxis1")
@@ -172,8 +175,9 @@ stockGraphs <- list(stockGraph(comparable = TRUE), stockGraph(comparable = FALSE
 setStockGraphs(.Object =  stockPanel(), stockGraphs = stockGraphs)
 stockPanel(stockGraphs = stockGraphs)
 # ---
-addStockGraph(.Object = stockPanel(), comparable = FALSE)
-addStockGraph(.Object = stockPanel(), stockGraph = stockGraph(comparable = FALSE))
+stock_panel <- addStockGraph(.Object = stockPanel(), comparable = FALSE); print(stock_panel)
+# or...
+stock_panel <- addStockGraph(.Object = stockPanel(), stockGraph = stockGraph(comparable = FALSE))
 # ---
 setStockLegend(.Object = stockPanel(), valueTextRegular = "[[value]]")
 # equivalent to:
