@@ -51,7 +51,7 @@ setMethod(f = "setResponsive", signature = c("AmCharts", "logicalOrMissing"),
 #' Test wether a chart can be plotted (or printed)
 #' @noRd
 #' 
-.plot_or_print <- function (object)
+.plot_or_print <- function(object)
 {
   if (length(object@type)) {
     # cat("Plotting...")
@@ -96,7 +96,7 @@ setMethod(f = "show", signature = "AmStockChart", definition = .plot_or_print)
 #' @export
 setMethod(f = "plot", signature = "AmCharts",
           definition = function(x, y, width = "100%", height = NULL,
-                                background = "#ffffff",...)
+                                background = "#ffffff", ...)
           {
             chart_ls <- listProperties(x)
             # remove temporary parameter
@@ -121,7 +121,7 @@ setMethod(f = "plot", signature = "AmCharts",
             # listeners on chart
             if (exists("listeners", where = chart_ls)) {
               listeners <- chart_ls$listeners
-              chart_ls["listeners"] <- NULL
+              chart_ls[grep(x = names(chart_ls), pattern = "^listeners")] <- NULL
             } else {
               listeners <- NULL
             }
@@ -169,6 +169,16 @@ setMethod(f = "plot", signature = "AmCharts",
             valueAxes_listeners <- ls_temp$listeners_ls
             valueAxes_listenersIndices <- ls_temp$indices
             
+            # group (Stock synchronisation)
+            if (exists("group", where = chart_ls)) {
+              group <- chart_ls$group
+              chart_ls[grep(x = names(chart_ls), pattern = "^group")] <- NULL
+              if(group == ""){
+                group <- NULL
+              }
+            } else {
+              group <- NULL
+            }
             
             # case for drilldown chart
             if (exists("subChartProperties", where = chart_ls)) {
@@ -178,9 +188,7 @@ setMethod(f = "plot", signature = "AmCharts",
               data <- list(main = chart_ls,
                            subProperties = x@subChartProperties,
                            background = background)
-              
             } else {
-              
               jsFile <- "ramcharts_base"
               data <- list(chartData = chart_ls,
                            background = background,
@@ -197,7 +205,8 @@ setMethod(f = "plot", signature = "AmCharts",
                            panels_listenersIndices = panels_listenersIndices,
                            periodSelector_listeners = periodSelector_listeners,
                            valueAxes_listeners = valueAxes_listeners,
-                           valueAxes_listenersIndices = valueAxes_listenersIndices)
+                           valueAxes_listenersIndices = valueAxes_listenersIndices, 
+                           group = group)
               
             }
             
@@ -214,8 +223,9 @@ setMethod(f = "plot", signature = "AmCharts",
             widget <- .add_theme_dependency(widget = widget, data = data)
             widget <- .add_dataloader_dependency(widget = widget, data = data)
             widget <- .add_responsive_dependency(widget = widget, data = data)
+            widget <- .add_language_dependency(widget = widget, data = data)
             
-            return (widget) 
+            return(widget) 
           })
 
 #' Add dependency for chart type
@@ -236,7 +246,7 @@ setMethod(f = "plot", signature = "AmCharts",
   
   # Load the configuration yaml file into list
   conf_list <- yaml::yaml.load_file(system.file("conf.yaml", package = "rAmCharts"))
-
+  
   # Add main js dependency
   type_dep <- htmltools::htmlDependency(name = paste0("amcharts_type_", type),
                                         # name = paste0("amcharts_type", type),
@@ -367,8 +377,9 @@ add_theme_dependency <- function (widget, theme_js = c("light.js", "patterns.js"
   
   if (cond1 || cond2) widget <- add_dataloader_dependency(widget = widget)
   
-  return (widget)
+  return(widget)
 }
+
 #' @title Add dataloader dependency
 #' 
 #' @description Add the 'dataloader' dependency to an htmlwidget.
@@ -380,7 +391,7 @@ add_theme_dependency <- function (widget, theme_js = c("light.js", "patterns.js"
 #' 
 #' @export
 #'
-add_dataloader_dependency <- function (widget)
+add_dataloader_dependency <- function(widget)
 {
   # Load the configuration yaml file into list
   conf_list <- yaml::yaml.load_file(system.file("conf.yaml", package = "rAmCharts"))
@@ -391,7 +402,7 @@ add_dataloader_dependency <- function (widget)
                                               script = conf_list$plugins$dataloader$script)
   widget <- .add_dependency(widget = widget, dependency = dataloader_dep)
   
-  return (widget)
+  return(widget)
 }
 
 
@@ -404,8 +415,11 @@ add_dataloader_dependency <- function (widget)
   
   if (cond) widget <- add_responsive_dependency(widget)
   
-  return (widget)
+  return(widget)
 }
+
+
+
 #' @title Add responsive dependency
 #' 
 #' @description Add the 'responsive' dependency to an htmlwidget.
@@ -417,7 +431,7 @@ add_dataloader_dependency <- function (widget)
 #' 
 #' @export
 #'
-add_responsive_dependency <- function (widget)
+add_responsive_dependency <- function(widget)
 {
   # Load the configuration yaml file into list
   conf_list <- yaml::yaml.load_file(system.file("conf.yaml", package = "rAmCharts"))
@@ -428,8 +442,46 @@ add_responsive_dependency <- function (widget)
                                               script = conf_list$plugins$responsive$script)
   widget <- .add_dependency(widget = widget, dependency = responsive_dep)
   
-  return (widget)
+  return(widget)
 }
+
+#' @title Add language
+#' 
+#' @description Add the javascript file associated to the language if necessary
+#' 
+#' @param widget An htmlwidget.
+#' @param data The associated data list.
+#'
+#' @return Return an updated htmlwidget with the dependency.
+#' 
+#' @noRd
+#' @export
+#'
+.add_language_dependency <- function(widget, data)
+{
+  # Load the configuration yaml file into list
+  conf_list <- yaml::yaml.load_file(system.file("conf.yaml", package = "rAmCharts"))
+  language <- data$chartData$language
+  if (length(language) > 0) {
+    language_dep_general <- htmltools::htmlDependency(name = "general_language",
+                                              version = conf_list$amcharts_version,
+                                              src = system.file("htmlwidgets/lib/lang",
+                                                                package = "rAmCharts"),
+                                              script = paste0(language, ".js"))
+    language_dep_export <- htmltools::htmlDependency(name = "export_language",
+                                              version = conf_list$amcharts_version,
+                                              src = system.file("htmlwidgets/lib/plugins/export/lang",
+                                                                package = "rAmCharts"),
+                                              script = paste0(language, ".js"))
+    widget <- .add_dependency(widget = widget, dependency = language_dep_general)
+    widget <- .add_dependency(widget = widget, dependency = language_dep_export)
+  } else {
+    # no need to add the dependency
+  }
+  
+  return(widget)
+}
+
 
 
 
@@ -508,5 +560,5 @@ substituteMultiListeners <- function(chart, obj)
   if (length(widget$dependencies) == 0) widget$dependencies <- list()
   widget$dependencies[[length(widget$dependencies)+1]] <- dependency
   
-  return (widget)
+  return(widget)
 }

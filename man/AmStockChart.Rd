@@ -40,10 +40,11 @@
 \title{Initializes an AmStockChart}
 \usage{
 \S4method{initialize}{AmStockChart}(.Object, balloon, comparedDataSets,
-  dataSets, dataSetSelector, mainDataSet, panels, periodSelector, theme, ...)
+  dataSets, dataSetSelector, mainDataSet, panels, periodSelector, theme, group,
+  ...)
 
 amStockChart(balloon, comparedDataSets, dataSets, dataSetSelector, mainDataSet,
-  panels, periodSelector, theme, ...)
+  panels, periodSelector, theme, group, ...)
 
 \S4method{setBalloon}{AmStockChart,AmBalloonOrMissing}(.Object,
   amBalloon = NULL, ...)
@@ -145,6 +146,8 @@ You can add it if you want user's to be able to enter
 date ranges or zoom chart with predefined period buttons.}
 
 \item{theme}{\code{character}.}
+
+\item{group}{\code{character} for synchronization}
 
 \item{...}{other properties of AmStockChart.}
 

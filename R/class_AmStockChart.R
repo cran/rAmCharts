@@ -21,6 +21,7 @@ NULL
 #' date ranges or zoom chart with predefined period buttons.
 #' @slot theme \code{character}
 #' @slot type equals "stock"
+#' @slot group \code{character} for synchronization
 #' 
 #' @slot listeners \code{list} containining the listeners to add to the chart.
 #' The list must be named as in the official API. Each element must be a character string.
@@ -40,7 +41,8 @@ setClass("AmStockChart", contains = "AmObject",
                                          panels = "list",
                                          periodSelector = "list",
                                          theme = "character",
-                                         type = "character"),
+                                         type = "character",
+                                         group = "characterOrNULL"),
          validity = function(object)
          {
            if (object@type != "stock") {
@@ -70,6 +72,7 @@ setClass("AmStockChart", contains = "AmObject",
 #' You can add it if you want user's to be able to enter
 #' date ranges or zoom chart with predefined period buttons.
 #' @param theme \code{character}.
+#' @param group \code{character} for synchronization
 #' @param ... other properties of AmStockChart.
 #' 
 #' @return An object of class \linkS4class{AmStockChart}.
@@ -87,7 +90,7 @@ setClass("AmStockChart", contains = "AmObject",
 setMethod(f = "initialize", signature = "AmStockChart",
           definition = function(.Object, balloon, comparedDataSets, dataSets,
                                 dataSetSelector, mainDataSet,
-                                panels, periodSelector, theme, ...)
+                                panels, periodSelector, theme, group, ...)
           {
             .Object@type = "stock"
             if (!missing(balloon))
@@ -106,6 +109,8 @@ setMethod(f = "initialize", signature = "AmStockChart",
               .Object <- setPeriodSelector(.Object = .Object, periodSelector = periodSelector)
             if (!missing(theme))
               .Object@theme <- theme
+            if (!missing(group))
+              .Object@group <- group
             .Object <- setProperties(.Object, ...)
             validObject(.Object)
             return(.Object)
@@ -121,7 +126,7 @@ setMethod(f = "initialize", signature = "AmStockChart",
 #' 
 amStockChart <- function(balloon, comparedDataSets, dataSets,
                          dataSetSelector, mainDataSet,
-                         panels, periodSelector, theme, ...)
+                         panels, periodSelector, theme, group, ...)
 {
   .Object <- new("AmStockChart")
   if (!missing(balloon))
@@ -140,6 +145,8 @@ amStockChart <- function(balloon, comparedDataSets, dataSets,
     .Object <- setPeriodSelector(.Object = .Object, periodSelector = periodSelector)
   if (!missing(theme))
     .Object@theme <- theme
+  if (!missing(group))
+    .Object@group <- group
   .Object <- setProperties(.Object, ...)
   
   validObject(.Object)
