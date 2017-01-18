@@ -1,4 +1,4 @@
-40cbbe014634b0d522cf63228fa26f55 *DESCRIPTION
+137160c99057822d66f73804544b7ceb *DESCRIPTION
 bdce3303fcaf38a58fbc4353e54c6821 *NAMESPACE
 8d1316fc2cc5d59b63a5574860e8edb0 *R/base_data.R
 583ae4883a0461b1bbb01cf58bad727c *R/base_startupMessage.R
@@ -16,7 +16,7 @@ c41875c2f5eccaf8d156a2cfa63591b0 *R/chart_amMekko.R
 9e52a2b81dc041e485fde1108797383f *R/chart_amPie.R
 46233cb224c978270683bbfacae8936c *R/chart_amPlot.R
 719e1798912b6d9f1dc35230ac1992a1 *R/chart_amRadar.R
-1d62827abd70138fe2a1a3c2c4c2b898 *R/chart_amTimeSeries.R
+e8e639aaa4a7cf75847b7c359f8c8ee3 *R/chart_amTimeSeries.R
 af0c5178f55488df599f122b563459a6 *R/chart_amWaterfall.R
 de5a25b1e05aee2e11f9de456446c24d *R/chart_amWind.R
 5b65abea62aefe9b5ed2890b3b25dac2 *R/classUnions.R
@@ -58,7 +58,7 @@ b77f7f3234070628ec9b9bea807c25d0 *R/class_Title.R
 f955d2d3eb78ed3d31622e0f776dc819 *R/class_TrendLine_setters.R
 f748e17dc1798858bf3ad4abc7b61f83 *R/class_ValueAxis.R
 f7892c4d03326421dc2f48398c032c85 *R/shiny_examples.R
-fb8470e87d6b27cd006402e06e6218bd *R/shiny_modules_export.R
+4c8c19d834a1c8338aa6dec8f8885e46 *R/shiny_modules_export.R
 f38c69dfce4f888736ca76bd1b008dcc *R/union_AmCharts.R
 e70a3256cabed74c8b603b7585d52325 *R/utils.R
 cf2e0aab46b7035cc5e1fa2f22b5044e *R/utils_amOptions.R
@@ -423,7 +423,7 @@ eb9cfb601548338f3aa5c422411ff6ae *man/amPie.Rd
 15d618277e62ac1116a075576ccb9ff5 *man/amRadar.Rd
 63f31bde37ace2b1ec631478e1463e13 *man/amSolidGauge.Rd
 0e86b625db604d6529ad8641c82838a3 *man/amStockMultiSet.Rd
-ef4d2839e1a2a0e77b170bff66585b53 *man/amTimeSeries.Rd
+d654bbfbf63375cbab056926469f8278 *man/amTimeSeries.Rd
 aba97579d5522bfe77ff8a9d0c0c599b *man/amWaterfall.Rd
 605f70bf2dee7727db7c231a8f45b9e6 *man/amWind.Rd
 1511924d403e2505d48259db022c945a *man/amcharts-setters.Rd
@@ -460,7 +460,7 @@ d0d8819222990d7728b76f35cec68298 *man/listProperties-AmObject.Rd
 2a04d25a8397f1a328c555def37b4284 *man/methods-AmObject.Rd
 316138dea9b39b1fa8974b8bf92ac16a *man/plot.AmChart.Rd
 4fd2179b2b0776fb7b72023f330e03b3 *man/print-AmObject-method.Rd
-7a6d4991f9761b1a617c81bdcd475e96 *man/rAmCharts-shinymodules.Rd
+ba9f3d8d71c13c0c74c12900ce13d49b *man/rAmCharts-shinymodules.Rd
 2c864d0c43df85eaa4d3334f71611029 *man/renderAmCharts.Rd
 67f20d8330e3a4db678cabc3bc6b745d *man/runExamples.Rd
 0a9572d02f934640688576d229793c49 *man/shared-generics.Rd
