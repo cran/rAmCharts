@@ -2,10 +2,10 @@
 % Please edit documentation in R/chart_amBoxplot.R
 \name{amBoxplot}
 \alias{amBoxplot}
-\alias{amBoxplot.data.frame}
 \alias{amBoxplot.default}
-\alias{amBoxplot.formula}
+\alias{amBoxplot.data.frame}
 \alias{amBoxplot.matrix}
+\alias{amBoxplot.formula}
 \title{Plotting boxplot using rAmCharts}
 \usage{
 amBoxplot(object, ...)
@@ -53,20 +53,27 @@ amBoxplot computes a boxplot of the given data values.
 Can be a vector, a data.frame, or a matrix.
 }
 \examples{
+
+\dontrun{
 # 'numeric' (default)
 amBoxplot(rnorm(100))
 
 # 'formula'
 amBoxplot(count ~ spray, data = InsectSprays)
 
+# 'formula', two group
+data <- InsectSprays
+data$group <- c("H", "F")
+amBoxplot(count ~ spray + group, data = data, col = c("purple", "darkblue"))
+
 # 'matrix'
 x <- matrix(nrow = 10, ncol = 5, rnorm(50))
 amBoxplot(x)
 
 # 'data.frame'
-amBoxplot(iris)
+amBoxplot(iris[, 1:4])
 
-
+}
 # Other examples available which can be time consuming depending on your configuration.
 
 \donttest{
@@ -109,4 +116,3 @@ amBoxplot(count ~ spray, data = InsectSprays, main = "amcharts")
 \item{\url{https://datastorm-open.github.io/introduction_ramcharts/}}
 }
 }
-

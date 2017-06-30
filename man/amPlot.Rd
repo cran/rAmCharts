@@ -2,12 +2,12 @@
 % Please edit documentation in R/chart_amPlot.R
 \name{amPlot}
 \alias{amPlot}
-\alias{amPlot.character}
-\alias{amPlot.data.frame}
 \alias{amPlot.default}
-\alias{amPlot.factor}
-\alias{amPlot.formula}
 \alias{amPlot.numeric}
+\alias{amPlot.character}
+\alias{amPlot.factor}
+\alias{amPlot.data.frame}
+\alias{amPlot.formula}
 \title{Plot serial data}
 \usage{
 amPlot(x, ...)
@@ -17,14 +17,15 @@ amPlot(x, ...)
 \method{amPlot}{numeric}(x, y, bullet = c("round", "diamond", "square",
   "bubble", "yError", "xError", "triangleLeft", "triangleRight", "triangleUp",
   "triangleDown"), type = c("points", "line", "smoothedLine", "step", "both"),
-  col = "#0066cc", weights = NULL, precision = 2, id, error, xlab, ylab,
-  lty, cex, lwd, xlim, ylim, ...)
+  col = "#0066cc", fill_alphas = 0, weights = NULL, precision = 2, id,
+  error, xlab, ylab, lty, cex, lwd, xlim, ylim, ...)
 
 \method{amPlot}{character}(x, y, bullet = c("round", "diamond", "square",
   "bubble", "yError", "xError", "triangleLeft", "triangleRight", "triangleUp",
   "triangleDown"), type = c("points", "line", "smoothedLine", "step", "both"),
-  col = "#0066cc", weights = NULL, precision = 2, parseDates = FALSE,
-  dataDateFormat, id, error, xlab, ylab, lty, cex, lwd, xlim, ylim, ...)
+  col = "#0066cc", fill_alphas = 0, weights = NULL, precision = 2,
+  parseDates = FALSE, dataDateFormat, id, error, xlab, ylab, lty, cex, lwd,
+  xlim, ylim, ...)
 
 \method{amPlot}{factor}(x, y, bullet = "round", type = "p", col = "gray",
   weights = NULL, precision = 2, parseDates = FALSE,
@@ -32,9 +33,10 @@ amPlot(x, ...)
   ...)
 
 \method{amPlot}{data.frame}(x, columns, type = "l", precision = 2, xlab,
-  ylab, ...)
+  ylab, fill_alphas = 0, ...)
 
-\method{amPlot}{formula}(x, data, type = "p", ...)
+\method{amPlot}{formula}(x, data, type = "p", fill_alphas = 0, xlab, ylab,
+  main = "", ...)
 }
 \arguments{
 \item{x}{the coordinates of points in the plot : \code{numeric},
@@ -54,6 +56,8 @@ for a smoothed line (deprecated), "st" for steps, "p" for points, and "b" for li
 Default set to "p".}
 
 \item{col}{either a \code{factor} or a \code{character}, default set to "gray".}
+
+\item{fill_alphas}{a \code{numeric} between 0 and 1 for printed area.}
 
 \item{weights}{\code{numeric}, weights for x/y charts only. Small values are prefered for lisibility.}
 
@@ -91,6 +95,8 @@ the names of the series to draw, or a \code{numeric} vector of indices.
 By default all numeric columns will be drawn.}
 
 \item{data}{dataset}
+
+\item{main}{title}
 }
 \value{
 Return an Amchart.
@@ -100,6 +106,8 @@ amPlot computes a plot of the given data values (can be a vectorn a dataframe
 or a formula).
 }
 \examples{
+
+\dontrun{
 # 'numeric':
 amPlot(x = rnorm(100))
 
@@ -118,7 +126,7 @@ amPlot(iris, col = colnames(iris)[1:2], type = c("l", "st"), zoom = TRUE, legend
 
 # 'formula':
 amPlot(Petal.Length + Sepal.Length ~ Sepal.Width, data = iris, legend = TRUE, zoom = TRUE)
-
+}
 
 \donttest{
 # Other examples available which can be time consuming depending on your configuration.
@@ -142,4 +150,3 @@ amPlot(x = x, y = y, weights = weights)
 \item{\url{https://datastorm-open.github.io/introduction_ramcharts/}}
 }
 }
-

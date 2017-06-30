@@ -1,19 +1,20 @@
 Package: rAmCharts
-Title: JavaScript Charts API Tool
-Description: API for using 'AmCharts' Library. Based on 'htmlwidgets', it
+Title: JavaScript Charts Tool
+Description: Provides an R interface for using 'AmCharts' Library. Based on 'htmlwidgets', it
     provides a global architecture to generate 'JavaScript' source code for charts.
     Most of classes in the library have their equivalent in R with S4 classes;
     for those classes, not all properties have been referenced but can easily be
     added in the constructors. Complex properties (e.g. 'JavaScript' object) can
-    be passed as named list. See examples at <http:// datastorm- open.github.io/
-    introduction_ramcharts/>. and <http://www.amcharts.com/> for more information
+    be passed as named list. See examples at 
+    <http://datastorm-open.github.io/introduction_ramcharts/>
+    and <http://www.amcharts.com/> for more information
     about the library. The package includes the free version of 'AmCharts'
     Library. Its only limitation is a small link to the web site displayed on
     your charts. If you enjoy this library, do not hesitate to refer to this
     page <http://www.amcharts.com/online-store/> to purchase a licence, and thus
-    support its creators and get a period of Priority Support. See also <http://
-    www.amcharts.com/about/> for more information about 'AmCharts' company.
-Version: 2.1.3
+    support its creators and get a period of Priority Support. See also 
+    <http://www.amcharts.com/about/> for more information about 'AmCharts' company.
+Version: 2.1.5
 Authors@R: c(
     person(given = "Jeffery", family = "Petit", email = "jeffery.petit@datastorm.fr", role = c("aut", "cre")),
     person(given = "Antanas", family = " Marcelionis", role = c("aut", "cph"),
@@ -21,7 +22,7 @@ Authors@R: c(
     person(given = "Benoit", family = "Thieurmel", email = "benoit.thieurmel@datastorm.fr", role = c("aut", "ctb")),
     person(given = "Elena", family = "Salette", email = "elena.salette@datastorm.fr", role = c("aut", "ctb")),
     person(given = "Titouan", family = "Robert", email = "titouan.robert@datastorm.fr", role = c("aut", "ctb")))
-Date: 2017-01-10
+Date: 2017-06-30
 License: GPL (>= 2)
 URL: http://datastorm-open.github.io/introduction_ramcharts/
 BugReports: https://github.com/datastorm-open/rAmCharts/issues/
@@ -50,14 +51,16 @@ Collate: 'base_data.R' 'base_startupMessage.R' 'chart_amBarplot.R'
         'class_GaugeAxis_setters.R' 'class_Guide_setters.R'
         'class_StockEvent_setters.R' 'class_StockPanel_setters.R'
         'class_TrendLine_setters.R' 'shiny_examples.R'
-        'shiny_modules_export.R' 'union_AmCharts.R' 'utils.R'
-        'utils_amOptions.R' 'utils_amTests.R'
+        'shiny_modules_export.R' 'shiny_modules_timeSeries.R'
+        'union_AmCharts.R' 'utils.R' 'utils_amOptions.R'
+        'utils_amTests.R'
 Imports: methods, htmlwidgets, htmltools, data.table (>= 1.9.6),
-        graphics, utils, pipeR, knitr, grDevices, yaml
-Suggests: magrittr, shiny, testthat, shinydashboard, base64enc
-RoxygenNote: 5.0.1
+        graphics, utils, pipeR, knitr, grDevices, yaml, zoo
+Suggests: magrittr, shiny, testthat, shinydashboard, base64enc,
+        lubridate, jsonlite
+RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-01-18 15:18:10 UTC; Jeff
+Packaged: 2017-06-30 13:30:42 UTC; jefferypetit
 Author: Jeffery Petit [aut, cre],
   Antanas Marcelionis [aut, cph] ('AmCharts' library in th directory
     htmlwidgets/lib/amcharts, refer to http://www.amcharts.com/),
@@ -66,4 +69,4 @@ Author: Jeffery Petit [aut, cre],
   Titouan Robert [aut, ctb]
 Maintainer: Jeffery Petit <jeffery.petit@datastorm.fr>
 Repository: CRAN
-Date/Publication: 2017-01-18 18:07:43
+Date/Publication: 2017-06-30 13:56:45 UTC
