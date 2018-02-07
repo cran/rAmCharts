@@ -74,7 +74,7 @@ amHist <- function(x, ...) UseMethod("amHist")
 #' 
 amHist.numeric <- function(x, col = "#1e90ff", border = "#1e90ff",
                            freq = TRUE, plot = TRUE, labels = FALSE,
-                           xlab, ylab, ylim, control_hist,...)
+                           xlab, ylab, ylim, control_hist, ...)
 {
   .testNumeric(num = x)
   
@@ -148,8 +148,8 @@ amHist.numeric <- function(x, col = "#1e90ff", border = "#1e90ff",
 #' @import data.table
 .dataAmHist <- function (resHist, y, col)
 {
-  data_DT <- data.table(x = round(resHist$mids, 1), y = y, 
-                        cut = paste0("(from ", round(resHist$breaks[-length(resHist$breaks)], 2),
-                                     " to ", round(resHist$breaks[-1], 2), ")"))
+  data_DT <- data.table(x = resHist$mids, y = y, 
+                        cut = paste0("(from ", resHist$breaks[-length(resHist$breaks)],
+                                     " to ", resHist$breaks[-1], ")"))
   data_DT[, eval(parse(text = "color:=col"))]
 }
