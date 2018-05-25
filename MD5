@@ -1,5 +1,5 @@
-b1d53ac1ea39a1dfc794364c75812bbc *DESCRIPTION
-2950cf60337c8311272c160c6fcdf999 *NAMESPACE
+7df18df47e0b2d8a558ae71d06813ddf *DESCRIPTION
+68bd6c6420899be648757535413b84e5 *NAMESPACE
 f393ff6b489af0464b3d8687aff8baa7 *R/base_data.R
 7d36a48a1daf37ccedb9f5d8d8979d8f *R/base_startupMessage.R
 46f5d5deabcfece9b99c10788facb219 *R/chart_amBarplot.R
@@ -59,8 +59,8 @@ e28daaf34c266fb6df84ef67985eefbf *R/class_Label.R
 c866f47e998fb76da5bccd008d60c649 *R/class_ValueAxis.R
 38b56542068ff9de65a4ad88be4eaa3c *R/shiny_examples.R
 90965619e52361c7815b6cc4417a90a3 *R/shiny_modules_export.R
-395e157f8f8eb400d1f42099662af9bb *R/shiny_modules_timeSeries.R
-7721cce8115f151f1ea936f86e398698 *R/union_AmCharts.R
+d3c1ab2f6dcb498b5bf6b8c341274621 *R/shiny_modules_timeSeries.R
+5fbeb74f3f1f2750e2788cc75bc033e4 *R/union_AmCharts.R
 6e24128d7f92b8cb6a9c9edee43a5512 *R/utils.R
 d877159b3313810a850e817074a4b5a9 *R/utils_amOptions.R
 7c15ea709ddb6041e71518d54b6aa380 *R/utils_amTests.R
@@ -85,7 +85,7 @@ df04eac299451e241b0ed8ac6f12c79c *data/data_waterfall.rda
 301c28a715c9fb8eaab0fa8e6c76ee12 *data/data_wind.rda
 5c82af48ff4701f41cde9d5cfbea3f02 *inst/NOTICE.Rmd
 a15a5ce18f08ba77b23c8077ca888a66 *inst/NOTICE.pdf
-9a4d923ff260310dc089a6513826081f *inst/conf.yaml
+eef5293a1cfc761ac85b26fd150c3045 *inst/conf.yaml
 eb3268d8d25cd348704cba525a28b069 *inst/htmlwidgets/amDrillChart.js
 e8f7befee0fd436670eb0f37c4878fa1 *inst/htmlwidgets/amDrillChart.yaml
 f80a6f24e45a9e6968613306235f9750 *inst/htmlwidgets/lib/amcharts.js
@@ -411,6 +411,7 @@ d749114ae8d2dcf23e2725e950f7541b *man/Title-class.Rd
 14b1abb4ec234f5fccffbff3b600c0a2 *man/TrendLine-class.Rd
 4df2bacf80aad2ddbe7fb4601194fe65 *man/TrendLine.Rd
 82fb61ee01aeec46ada0e28087507016 *man/ValueAxis-class.Rd
+88c940621d3bb1fc30545d50fce9e98b *man/add_animate_dependency.Rd
 a06b74eea25de0d1951bcb72cb33136e *man/add_dataloader_dependency.Rd
 4419c430394d263c6c8faba26e2b076f *man/add_export_dependency.Rd
 71abbecf97a68160593b61c92cc70ff1 *man/add_responsive_dependency.Rd
@@ -456,8 +457,8 @@ c7fab3df6ffec8a50227241a4e931cd5 *man/data_stock_2.Rd
 ac6f3a5d61b673b466d4b298d1dbfa47 *man/data_stock_3.Rd
 8749613736154bc928aa76ceeb55c16a *man/data_waterfall.Rd
 0df3ac64e1deabc8743a63ddd5550315 *man/data_wind.Rd
-a3257bd7f3ce7bf0fac7853a6b532faa *man/getCurrentStockData.Rd
-9788ac740958929eb4d97131270ba640 *man/getTransformTS.Rd
+05e3b13d1b856146c1fef265969791b9 *man/getCurrentStockData.Rd
+1608345909d77c9ff98e20e83957e01f *man/getTransformTS.Rd
 c75d78115c00e61e92f9ed7a1b3d5da7 *man/initialize-AmChart.Rd
 2c1237f93612c23dfd15e516bbad8af3 *man/initialize-AmLegend.Rd
 ca8abde633d9635db1e8563b6bfba34e *man/initialize-AxisBase.Rd
@@ -473,7 +474,7 @@ e83d51e05cefdd7ff21e80a5099ffeab *man/initialize-StockEvent.Rd
 bd7701ad3346aebe84518829d0431479 *man/methods-AmObject.Rd
 e6f8ed58a87669cf4a8b59fc6fff8f8f *man/plot.AmChart.Rd
 4456f8748b700ca6019d7d669ebd3c83 *man/print-AmObject-method.Rd
-d1c89cb0a7961ac039cc60edf5d3d369 *man/rAmCharts-shinymodules-ts.Rd
+2c27b70b0032de701e045eeee7c1e26d *man/rAmCharts-shinymodules-ts.Rd
 c83b5eee59f7ed73d83936c46addf055 *man/rAmCharts-shinymodules.Rd
 be5619ecb9155c3f7057458f17f9bbfc *man/renderAmCharts.Rd
 1146673e337d7efc0256f4f418a4b731 *man/runExamples.Rd
@@ -513,4 +514,4 @@ a5e009bd335e69748f93719afa763b59 *tests/testthat/test_amTests.R
 43da585fdef5da1cc5984715e5981ec2 *tests/testthat/test_amWaterfall.R
 cb3fd2e6022d91fc83aab5b84f915c54 *tests/testthat/test_amWind.R
 6835f67462730879573529f33f54a95e *tests/testthat/test_amchart_setters.R
-524c3429562ba56976d1dd85fdbb2da3 *tests/testthat/test_getAggregateTS.R
+ac8930515a89e93e949d18f39a623f95 *tests/testthat/test_getAggregateTS.R
