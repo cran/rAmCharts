@@ -1,4 +1,5 @@
-#' @title Plotting times series which aggregation
+#' @title Plotting times series (with or without aggregation)
+#' 
 #' @description  amTimeSeries computes a stock chart.
 #' 
 #' @param data \code{data.frame}, data of graph.
@@ -109,13 +110,17 @@
 #'              creditsPosition = "bottom-left")
 #'              
 #' }
-#' @seealso 
-#' \itemize{
-#' \item{\url{https://datastorm-open.github.io/introduction_ramcharts/}}
-#' }
-#'
+#' 
+#' @seealso \link{rAmChartsTimeSeriesUI} for shiny module, \link{amOptions}, \link{amBarplot}, \link{amBoxplot}, \link{amHist}, \link{amPie},
+#' \link{amPlot}, \link{amTimeSeries}, \link{amStockMultiSet}, \link{amBullet}, \link{amRadar}, 
+#' \link{amWind}, \link{amFunnel}, \link{amAngularGauge}, \link{amSolidGauge}, \link{amMekko},
+#' \link{amCandlestick}, \link{amFloatingBar}, \link{amOHLC}, \link{amWaterfall}
+#' 
 #' @export
 #'
+#' @references See online documentation \url{https://datastorm-open.github.io/introduction_ramcharts/}
+#' and \link{amChartsAPI}
+#' 
 amTimeSeries <- function(data, col_date,
                          col_series,
                          main = "",
@@ -256,9 +261,9 @@ amTimeSeries <- function(data, col_date,
   data[,col_date] <- data[,col_date] + (as.POSIXlt(as.character(data[,col_date]), tz = "UTC") - data[,col_date])
   
   # groupToPeriods control
-  if(nrow(data) >= 4){
-    difft <- min(c(as.numeric(difftime(data[3,col_date], data[2,col_date], units = "secs")),
-                   as.numeric(difftime(data[4,col_date], data[3,col_date], units = "secs"))))
+  if(nrow(data) >= 5){
+    difft <- min(c(as.numeric(difftime(data[4,col_date], data[3,col_date], units = "secs")),
+                   as.numeric(difftime(data[5,col_date], data[4,col_date], units = "secs"))))
   } else if(nrow(data) >= 2){
     difft <- as.numeric(difftime(data[2,col_date], data[1,col_date], units = "secs"))
   } else {

@@ -395,6 +395,11 @@ getTransformTS <- function(data, col_date  = "date",
                            showwarn = FALSE){
   
   
+  if(!showwarn){
+    cur_warn <- options("warn")
+    options(warn = -1)
+  }
+  
   if(treat_missing){
     control_date <- TRUE
   }
@@ -469,7 +474,7 @@ getTransformTS <- function(data, col_date  = "date",
     data_check <- data.table(seq(data[[col_date]][1],
                                  data[[col_date]][nrow(data)], by = "day"))
     setnames(data_check, "V1", col_date)
-    data <- base::merge(data, data_check, by = col_date, all = TRUE)
+    data <- data.frame(merge(data.table(data), data_check, by = col_date, all = TRUE))
     control_date <- FALSE
     data[[col_date]] <- as.POSIXct(as.character(data[[col_date]]), tz = tzdate)
   }
@@ -512,7 +517,7 @@ getTransformTS <- function(data, col_date  = "date",
                                  data[[col_date]][nrow(data)],
                                  by = current_time_level))
     setnames(data_check, "V1", col_date)  
-    data <- base::merge(data, data_check, by = col_date, all = TRUE)
+    data <- data.frame(merge(data.table(data), data_check, by = col_date, all = TRUE))
   }
   
   if(type_aggr == "last"){
@@ -565,11 +570,11 @@ getTransformTS <- function(data, col_date  = "date",
     } else if(fun_aggr == "first"){
       expr_transformation <- parse(text = paste0("list(", col_date, "=", timefun, "(", col_date, "),",
                                                  paste(paste0(col_series, "= head(", col_series,
-                                                              ", n = 1)"), collapse = ","), ",tmp_N = .N)"))
+                                                              "[!is.na(", col_series, ")], n = 1)"), collapse = ","), ",tmp_N = .N)"))
     } else if(fun_aggr == "last"){
       expr_transformation <- parse(text = paste0("list(", col_date, "=", timefun, "(", col_date, "),",
                                                  paste(paste0(col_series, "= tail(", col_series,
-                                                              ", n = 1)"), collapse = ","), ",tmp_N = .N)"))
+                                                              "[!is.na(", col_series, ")], n = 1)"), collapse = ","), ",tmp_N = .N)"))
     }
     
     
@@ -669,17 +674,16 @@ getTransformTS <- function(data, col_date  = "date",
       res[, c("mtqtime") := NULL]
     }
     
-    if(showwarn){
-      # check first value
-      if(res[2, get("tmp_N")] != res[1, get("tmp_N")]){
-        warning("Be carreful : first value seems to be compute on a incomplete sequence")
-      }
-      
-      # check last value
-      if(res[nrow(res), get("tmp_N")] != res[nrow(res)-1, get("tmp_N")]){
-        warning("Be carreful : last value seems to be compute on a incomplete sequence")
-      }
+    # check first value
+    if(res[2, get("tmp_N")] != res[1, get("tmp_N")] & showwarn){
+      warning("Be carreful : first value seems to be compute on a incomplete sequence")
     }
+    
+    # check last value
+    if(res[nrow(res), get("tmp_N")] != res[nrow(res)-1, get("tmp_N")] & showwarn){
+      warning("Be carreful : last value seems to be compute on a incomplete sequence")
+    }
+    
     res[, c("tmp_N") := NULL]
     
     if(type_aggr == "last"){
@@ -750,6 +754,10 @@ getTransformTS <- function(data, col_date  = "date",
     invisible()
   }
   rename_quanti <- sapply(col_series, tmp_function)
+  
+  if(!showwarn){
+    options(warn = cur_warn$warn)
+  }
   
   res
 }

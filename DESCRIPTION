@@ -13,7 +13,7 @@ Description: Provides an R interface for using 'AmCharts' Library. Based on
     to this page <http://www.amcharts.com/online-store/> to purchase a licence,
     and thus support its creators and get a period of Priority Support. See also
     <http://www.amcharts.com/about/> for more information about 'AmCharts' company.
-Version: 2.1.7
+Version: 2.1.8
 Authors@R: c(
     person(given = "Benoit", family = "Thieurmel", email = "benoit.thieurmel@datastorm.fr", role = c("aut", "cre")),
     person(given = "Antanas", family = " Marcelionis", role = c("aut", "cph"),
@@ -22,21 +22,22 @@ Authors@R: c(
     person(given = "Elena", family = "Salette", email = "elena.salette@datastorm.fr", role = c("aut", "ctb")),
     person(given = "Titouan", family = "Robert", email = "titouan.robert@datastorm.fr", role = c("aut", "ctb")))
 Maintainer: Benoit Thieurmel <benoit.thieurmel@datastorm.fr>
-Date: 2018-05-25
+Date: 2018-06-21
 License: GPL (>= 2)
 URL: http://datastorm-open.github.io/introduction_ramcharts/
 BugReports: https://github.com/datastorm-open/rAmCharts/issues/
 Depends: R (>= 3.2.0)
-Collate: 'base_data.R' 'base_startupMessage.R' 'chart_amBarplot.R'
-        'chart_amBoxplot.R' 'chart_amBullet.R' 'chart_amCandlestick.R'
-        'chart_amDataset.R' 'chart_amFloatingBar.R' 'chart_amFunnel.R'
-        'chart_amGauge.R' 'chart_amHist.R' 'chart_amMekko.R'
-        'chart_amOHLC.R' 'chart_amPie.R' 'chart_amPlot.R'
-        'chart_amRadar.R' 'chart_amTimeSeries.R' 'chart_amWaterfall.R'
-        'chart_amWind.R' 'utils_sharedGenerics.R' 'class_AmObject.R'
-        'class_AxisBase.R' 'class_ValueAxis.R'
-        'utils_basicClassUnions.R' 'class_TrendLine.R' 'class_Title.R'
-        'class_AmChart.R' 'class_StockPanel.R' 'class_StockEvent.R'
+Collate: 'amChartsAPI.R' 'base_data.R' 'base_startupMessage.R'
+        'chart_amBarplot.R' 'chart_amBoxplot.R' 'chart_amBullet.R'
+        'chart_amCandlestick.R' 'chart_amDataset.R'
+        'chart_amFloatingBar.R' 'chart_amFunnel.R' 'chart_amGauge.R'
+        'chart_amHist.R' 'chart_amMekko.R' 'chart_amOHLC.R'
+        'chart_amPie.R' 'chart_amPlot.R' 'chart_amRadar.R'
+        'chart_amTimeSeries.R' 'chart_amWaterfall.R' 'chart_amWind.R'
+        'utils_sharedGenerics.R' 'class_AmObject.R' 'class_AxisBase.R'
+        'class_ValueAxis.R' 'utils_basicClassUnions.R'
+        'class_TrendLine.R' 'class_Title.R' 'class_AmChart.R'
+        'class_StockPanel.R' 'class_StockEvent.R'
         'class_PeriodSelector.R' 'class_Label.R' 'class_Guide.R'
         'class_GaugeAxis.R' 'class_GaugeBand.R' 'class_GaugeArrow.R'
         'class_DataSet.R' 'class_ChartScrollbar.R'
@@ -60,7 +61,7 @@ Suggests: magrittr, shiny, testthat, shinydashboard, base64enc,
         lubridate, jsonlite
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-05-25 13:05:09 UTC; Datastorm
+Packaged: 2018-06-21 08:31:35 UTC; Datastorm
 Author: Benoit Thieurmel [aut, cre],
   Antanas Marcelionis [aut, cph] ('AmCharts' library in th directory
     htmlwidgets/lib/amcharts, refer to http://www.amcharts.com/),
@@ -68,4 +69,4 @@ Author: Benoit Thieurmel [aut, cre],
   Elena Salette [aut, ctb],
   Titouan Robert [aut, ctb]
 Repository: CRAN
-Date/Publication: 2018-05-25 13:23:35 UTC
+Date/Publication: 2018-06-21 16:52:18 UTC
