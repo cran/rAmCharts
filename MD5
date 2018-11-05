@@ -1,4 +1,4 @@
-ad862490a05694bd6335297d55670601 *DESCRIPTION
+5eb9f02046c06377af1b11ac1e5e91c8 *DESCRIPTION
 15ed14cccd30e1dacb94152f61e75ee6 *NAMESPACE
 859570aee1b2448294f4cc95f9bdcae7 *R/amChartsAPI.R
 f393ff6b489af0464b3d8687aff8baa7 *R/base_data.R
@@ -17,7 +17,7 @@ d97e94d95e464b9eb2e61739cff35265 *R/chart_amFunnel.R
 97b99a4c7a5ee74a30b528098ce863c3 *R/chart_amPie.R
 bd30321f1ab2647c4c6cc09cccf6d800 *R/chart_amPlot.R
 31da2b38efe523fbcac5f436fa4c6d33 *R/chart_amRadar.R
-356535e8d4000b3550c434f88913cbd0 *R/chart_amTimeSeries.R
+45f8c7e83b3671a9b99ac41da09fd5fd *R/chart_amTimeSeries.R
 4ffc71e33e8d0ac8cac39aeaae3b9cb4 *R/chart_amWaterfall.R
 fa5f9250bdd2093c5d67e7e2135be448 *R/chart_amWind.R
 c9638a031e4c1d41c7fab16694599986 *R/classUnions.R
@@ -60,7 +60,7 @@ e28daaf34c266fb6df84ef67985eefbf *R/class_Label.R
 c866f47e998fb76da5bccd008d60c649 *R/class_ValueAxis.R
 38b56542068ff9de65a4ad88be4eaa3c *R/shiny_examples.R
 90965619e52361c7815b6cc4417a90a3 *R/shiny_modules_export.R
-dddc4c93f4a2859eab5b9699b2c92a24 *R/shiny_modules_timeSeries.R
+fc82baba5333f9cd85836a119953ec72 *R/shiny_modules_timeSeries.R
 5fbeb74f3f1f2750e2788cc75bc033e4 *R/union_AmCharts.R
 6e24128d7f92b8cb6a9c9edee43a5512 *R/utils.R
 19c9ea52316e2ae3c609d2b99817377e *R/utils_amOptions.R
@@ -459,7 +459,7 @@ f3e98ea7fcd03bd6de9c8463408fb42f *inst/htmlwidgets/lib/themes/chalk.js
 4990e9d531802f985047cb7f1be262b8 *inst/htmlwidgets/lib/themes/light.js
 1bb2ed13d18a5be903a02d5f97afd2b8 *inst/htmlwidgets/lib/themes/patterns.js
 6fcb43739a01e31d83c531c1318d7d0c *inst/htmlwidgets/lib/xy.js
-3fabc3ce5909cffd9daab5fb4df61adf *inst/htmlwidgets/ramcharts_base.js
+722c48104fb6d52a23db85bd4f1535cb *inst/htmlwidgets/ramcharts_base.js
 cfe7f5f7c87864b1f0566d8c8a219220 *inst/htmlwidgets/ramcharts_base.yaml
 1185f10738e92b718d083952e2897b42 *inst/modules/global.R
 e4e90d203381a716f738b164b0f77276 *inst/modules/server.R
@@ -521,6 +521,7 @@ a38edf1595dcc9624a7ca35bc930f505 *inst/shiny/src/stock/stock_ui.R
 49901a61405b415623b100242373d2ef *inst/shiny/src/xy/xy_ui.R
 cbffc7ce0af69bc45d417921c30bbdb0 *inst/shiny/ui.R
 7698deb036abe3ea68feabb74e9a101f *inst/shiny/www/style.css
+4e095c18030313c3e533538cc62e5fff *inst/tests/tests_ts.R
 d28f9270d63d96fd85b43975d1153a63 *inst/tests/update_xy_data/app.R
 50a7aba48714598ff208a9df585eb679 *man/AmBalloon-class.Rd
 48b33b9bf254e2c08b8f50db6ef127cc *man/AmBalloon.Rd
@@ -620,7 +621,7 @@ e83d51e05cefdd7ff21e80a5099ffeab *man/initialize-StockEvent.Rd
 bd7701ad3346aebe84518829d0431479 *man/methods-AmObject.Rd
 e6f8ed58a87669cf4a8b59fc6fff8f8f *man/plot.AmChart.Rd
 4456f8748b700ca6019d7d669ebd3c83 *man/print-AmObject-method.Rd
-2c27b70b0032de701e045eeee7c1e26d *man/rAmCharts-shinymodules-ts.Rd
+f8947072b22b5300719b1be13da95b2d *man/rAmCharts-shinymodules-ts.Rd
 c83b5eee59f7ed73d83936c46addf055 *man/rAmCharts-shinymodules.Rd
 be5619ecb9155c3f7057458f17f9bbfc *man/renderAmCharts.Rd
 1146673e337d7efc0256f4f418a4b731 *man/runExamples.Rd

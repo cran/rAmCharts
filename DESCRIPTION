@@ -13,7 +13,7 @@ Description: Provides an R interface for using 'AmCharts' Library. Based on
     to this page <http://www.amcharts.com/online-store/> to purchase a licence,
     and thus support its creators and get a period of Priority Support. See also
     <http://www.amcharts.com/about/> for more information about 'AmCharts' company.
-Version: 2.1.8
+Version: 2.1.9
 Authors@R: c(
     person(given = "Benoit", family = "Thieurmel", email = "benoit.thieurmel@datastorm.fr", role = c("aut", "cre")),
     person(given = "Antanas", family = " Marcelionis", role = c("aut", "cph"),
@@ -22,7 +22,7 @@ Authors@R: c(
     person(given = "Elena", family = "Salette", email = "elena.salette@datastorm.fr", role = c("aut", "ctb")),
     person(given = "Titouan", family = "Robert", email = "titouan.robert@datastorm.fr", role = c("aut", "ctb")))
 Maintainer: Benoit Thieurmel <benoit.thieurmel@datastorm.fr>
-Date: 2018-06-21
+Date: 2018-11-05
 License: GPL (>= 2)
 URL: http://datastorm-open.github.io/introduction_ramcharts/
 BugReports: https://github.com/datastorm-open/rAmCharts/issues/
@@ -61,7 +61,7 @@ Suggests: magrittr, shiny, testthat, shinydashboard, base64enc,
         lubridate, jsonlite
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-06-21 08:31:35 UTC; Datastorm
+Packaged: 2018-11-05 12:19:10 UTC; Datastorm
 Author: Benoit Thieurmel [aut, cre],
   Antanas Marcelionis [aut, cph] ('AmCharts' library in th directory
     htmlwidgets/lib/amcharts, refer to http://www.amcharts.com/),
@@ -69,4 +69,4 @@ Author: Benoit Thieurmel [aut, cre],
   Elena Salette [aut, ctb],
   Titouan Robert [aut, ctb]
 Repository: CRAN
-Date/Publication: 2018-06-21 16:52:18 UTC
+Date/Publication: 2018-11-05 12:50:02 UTC
