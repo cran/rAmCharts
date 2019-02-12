@@ -1,10 +1,10 @@
-5eb9f02046c06377af1b11ac1e5e91c8 *DESCRIPTION
+0f292616da0ad3eb6f5c5d7cfde424da *DESCRIPTION
 15ed14cccd30e1dacb94152f61e75ee6 *NAMESPACE
 859570aee1b2448294f4cc95f9bdcae7 *R/amChartsAPI.R
 f393ff6b489af0464b3d8687aff8baa7 *R/base_data.R
 dd0fc6d5e429a8f333deca993a4e5137 *R/base_startupMessage.R
 ef24c7d90df74f7fe9127428fb8dc1af *R/chart_amBarplot.R
-5ec1437bba07c2d3da5103460d2890c3 *R/chart_amBoxplot.R
+c60e4de534186df72ab3810580a4f534 *R/chart_amBoxplot.R
 a4754246ef47391de7ca56f926e12d76 *R/chart_amBullet.R
 c48a339c1994eb8c86c46cc550a1a171 *R/chart_amCandlestick.R
 725c6b309701ba5254bb1a6f7069aa61 *R/chart_amDataset.R
