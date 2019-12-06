@@ -4,8 +4,17 @@
 \alias{amSolidGauge}
 \title{Plotting solid gauge using rAmCharts}
 \usage{
-amSolidGauge(x, min = 0, max = 100, type = "full", width = 20,
-  color = "", text = "", textSize = 20, ...)
+amSolidGauge(
+  x,
+  min = 0,
+  max = 100,
+  type = "full",
+  width = 20,
+  color = "",
+  text = "",
+  textSize = 20,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{numeric}, value for which the angular gauge is desired.}
@@ -35,6 +44,7 @@ amSolidGauge(x = 65)
 \donttest{
 # Other examples available which can be time consuming depending on your configuration.
 
+if (requireNamespace("pipeR", quietly = TRUE)) {
 require(pipeR)
 
 # Change min and max values
@@ -56,10 +66,11 @@ amSolidGauge(x = 70, color = c("#00ff00", "#ffd700", "#ff0000"))
 amSolidGauge(x = 90, color = c("#00ff00", "#ffd700", "#ff0000"))
 
 # Add some text to the printed value
-amSolidGauge(x = 65, text = "\%")
+amSolidGauge(x = 65, text = "Pct")
 
 # Modify textSize value
-amSolidGauge(x = 65, text = "\%", textSize = 50)
+amSolidGauge(x = 65, text = "Pct", textSize = 50)
+}
 }
 
 }

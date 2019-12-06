@@ -4,8 +4,15 @@
 \alias{amRadar}
 \title{Plotting radar}
 \usage{
-amRadar(data, col = NULL, backTransparency = 0.5, type = "polygons",
-  pch = "round", xlim = NULL, ...)
+amRadar(
+  data,
+  col = NULL,
+  backTransparency = 0.5,
+  type = "polygons",
+  pch = "round",
+  xlim = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{\code{data.frame} first column is named "label" (character), other columns are series of values,
@@ -36,6 +43,7 @@ amRadar(data_radar)
 
 # Other examples available which can be time consuming depending on your configuration.
 
+if (requireNamespace("pipeR", quietly = TRUE)) {
 require(pipeR)
 
 # Change color
@@ -57,6 +65,7 @@ amRadar(data_radar,  pch = "triangleLeft")
 
 # Min-Max
 amRadar(data_radar, xlim = c(0, 8))
+}
 }
 
 
