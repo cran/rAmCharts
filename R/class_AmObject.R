@@ -76,6 +76,7 @@ setMethod(f = "print", signature = "AmObject",
 #' @param expression \code{character}, associated function event.
 #' @return The updated object.
 #' @examples
+#' \dontrun{
 #' addListener(.Object = amPieChart(),
 #'             name = "clickSlice" ,
 #'             expression = "function(event){ alert('ok !'); }")
@@ -85,6 +86,7 @@ setMethod(f = "print", signature = "AmObject",
 #'             expression = paste0("function onSelect (properties) {",
 #'                                 "alert('selected nodes: ' + properties.nodes);",
 #'                                 "}"))
+#' }
 #' @rdname methods-AmObject
 #' @export
 #' 
@@ -103,8 +105,12 @@ setMethod(f = "addListener", signature = c("AmObject", "character", "character")
 
 
 #' @examples
+#' 
+#' \dontrun{
 #' library(pipeR)
 #' amPlot(runif(10)) %>>% resetProperties("categoryAxis") %>>% print(withDetail = FALSE)
+#' }
+#' 
 #' @details Former properties will be overwritten.
 #' @rdname methods-AmObject
 #' @export
@@ -128,6 +134,8 @@ setMethod(f = "resetProperties", signature = c(.Object = "AmObject"),
 #' The former properties will be overwritten.
 #' @param ... other properties
 #' @examples
+#' 
+#' \dontrun{
 #' library(pipeR)
 #' # either you can set a list
 #' ls <- list(categoryAxis = list(gridPosition = "start"), fontSize = 15)
@@ -141,11 +149,13 @@ setMethod(f = "resetProperties", signature = c(.Object = "AmObject"),
 #' 
 #' # Carefull if you try to set a property which is a slot...
 #' # in that case, use the setter methods 'setXX' or 'addXX' which check the validity
-#' \dontrun{
+#' 
 #' amPieChart() %>>% setProperties(type = "serial") %>>% print()
-#' }
+#' 
 #' 
 #' amPieChart() %>>% setExport()
+#' 
+#' }
 #' @details Former properties will be overwritten.
 #' @rdname methods-AmObject
 #' @export
@@ -185,7 +195,11 @@ setMethod(f = "setProperties", signature = c(.Object = "AmObject"),
 #' @param .Object any class object of the package
 #' @return A list containing all the chart's properties.
 #' @examples
+#' 
+#' \dontrun{
 #' amChart(type = "serial")
+#' }
+#' 
 #' @rdname listProperties-AmObject
 #' @export
 #' 

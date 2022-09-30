@@ -87,13 +87,16 @@ Zoom on the chart to see if the chart can contain all labels. If not, use the pa
 You can also add a cursor to your chart...
 }
 \examples{
+
+\dontrun{
+
 # Data
 data(data_bar)
 data(data_gbar)
 
 amBarplot(x = "country", y = "visits", data = data_bar, main = "example")
 
-\donttest{
+
 
 # Other examples available which can be time consuming depending on your configuration.
 
@@ -135,7 +138,7 @@ amBarplot(x = "year", y = c("income", "expenses"), data = data_gbar,
 # Regular stacked bars
 amBarplot(x = "year", y = c("income", "expenses"), data = data_gbar, stack_type = "regular")
 
-# 100% stacked bars
+# 100\% stacked bars
 amBarplot(x = "year", y = c("income", "expenses"), data = data_gbar, stack_type = "100")
 
 # Layered bars

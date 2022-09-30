@@ -30,7 +30,7 @@ NULL
 #' containing other avalaible properties not yet implemented in the package.
 #' @slot value \code{numeric}.
 #' 
-#' @seealso \url{http://docs.amcharts.com/3/javascriptstockchart/AmStockChart}
+#' @seealso \url{https://docs.amcharts.com/3/javascriptstockchart/AmStockChart}
 #' 
 #' 
 setClass("AmStockChart", contains = "AmObject",
@@ -82,7 +82,7 @@ setClass("AmStockChart", contains = "AmObject",
 #' @return An object of class \linkS4class{AmStockChart}.
 #' 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # --- method 'initialize'
 #' new("AmStockChart", theme = "dark")
 #' }
@@ -124,7 +124,7 @@ setMethod(f = "initialize", signature = "AmStockChart",
 
 #' @rdname AmStockChart
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # --- constructor
 #' amStockChart()
 #' }
@@ -166,6 +166,8 @@ amStockChart <- function(balloon, comparedDataSets, dataSets,
 #' #' # --- signature 'AmStockChart'
 #' #' listProperties(amStockChart(test = 1))
 #' #' 
+#' 
+#' \dontrun{
 #' setMethod(f = "listProperties", signature = "AmStockChart",
 #'           definition = function(.Object)
 #'           {
@@ -191,3 +193,4 @@ amStockChart <- function(balloon, comparedDataSets, dataSets,
 #'             
 #'             return(ls)
 #'           })
+#'  }

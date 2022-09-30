@@ -23,6 +23,7 @@ rAmChartsTimeSeriesServer(
   treat_missing = shiny::reactive(FALSE),
   maxgap = shiny::reactive(Inf),
   type_aggr = shiny::reactive("first"),
+  na.rm = shiny::reactive(TRUE),
   main = shiny::reactive(""),
   ylab = shiny::reactive(""),
   color = shiny::reactive(c("#2E2EFE", "#31B404", "#FF4000", "#AEB404")),
@@ -53,14 +54,18 @@ rAmChartsTimeSeriesServer(
   categoryBalloonDateFormats = shiny::reactive(list(list(period = "YYYY", format =
     "YYYY"), list(period = "MM", format = "YYYY-MM"), list(period = "WW", format =
     "YYYY-MM-DD"), list(period = "DD", format = "YYYY-MM-DD"), list(period = "hh", format
-    = "YYYY-MM-DD JJ:NN"), list(period = "mm", format = "YYYY-MM-DD JJ:NN"), list(period =
-    "ss", format = "YYYY-MM-DD JJ:NN:ss"), list(period = "fff", format =
+    = "YYYY-MM-DD JJ:NN"), list(period = "mm", format = "YYYY-MM-DD JJ:NN"), list(period
+    = "ss", format = "YYYY-MM-DD JJ:NN:ss"), list(period = "fff", format =
     "YYYY-MM-DD JJ:NN:ss"))),
-  dateFormats = shiny::reactive(list(list(period = "YYYY", format = "YYYY"), list(period
-    = "MM", format = "MMM"), list(period = "WW", format = "MMM DD"), list(period = "DD",
-    format = "MMM DD"), list(period = "hh", format = "JJ:NN"), list(period = "mm", format
-    = "JJ:NN"), list(period = "ss", format = "JJ:NN:ss"), list(period = "fff", format =
-    "JJ:NN:ss")))
+  dateFormats = shiny::reactive(list(list(period = "YYYY", format = "YYYY"),
+    list(period = "MM", format = "MMM"), list(period = "WW", format = "MMM DD"),
+    list(period = "DD", format = "MMM DD"), list(period = "hh", format = "JJ:NN"),
+    list(period = "mm", format = "JJ:NN"), list(period = "ss", format = "JJ:NN:ss"),
+    list(period = "fff", format = "JJ:NN:ss"))),
+  thousandsSeparator = shiny::reactive(" "),
+  decimalSeparator = shiny::reactive("."),
+  balloonFontSize = shiny::reactive(10),
+  balloonMaxWidth = shiny::reactive(400)
 )
 }
 \arguments{
@@ -94,7 +99,7 @@ containing one of "min", "hour", "day"....
 This can optionally be preceded by a positive integer
 and a space}
 
-\item{fun_aggr}{: Aggregation function to use ("min", "max", "sum", "mean", "first", "last").
+\item{fun_aggr}{: Aggregation function to use ("min", "max", "sum", "mean", "first", "last", "minabs", "maxabs").
 Default to "mean".}
 
 \item{treat_missing}{: Boolean. Default to FALSE
@@ -109,6 +114,8 @@ Maximum number of consecutive NAs to fill. Defaut to Inf.}
  \item{"first"}{ : Date/Time result is equal to minimum of sequence, and this minimum is included in aggregation}
  \item{"last"}{ : Date/Time result is equal to maximum of sequence, and this maximum is included in aggregation}
 }}
+
+\item{na.rm}{: aggregation only. a logical value indicating whether NA values should be stripped before the computation proceeds.}
 
 \item{main}{\code{character}, title.}
 
@@ -179,6 +186,14 @@ Maximum number of consecutive NAs to fill. Defaut to Inf.}
 \item{categoryBalloonDateFormats}{\code{list} Date format objects for chart cursor. See \code{\link{amTimeSeries}}.}
 
 \item{dateFormats}{\code{list} Date format objects for x-axis. See \code{\link{amTimeSeries}}.}
+
+\item{thousandsSeparator}{\code{character}, default set to " "}
+
+\item{decimalSeparator}{\code{character}, default set to ".",}
+
+\item{balloonFontSize}{\code{numeric}, text font size on balloon. Default : 10.}
+
+\item{balloonMaxWidth}{\code{numeric}. Default : 400.}
 }
 \value{
 a reactive expression with aggregate data and ts
@@ -192,11 +207,12 @@ Shiny module to render large time-series data with live server-client aggregatio
 
 library(shiny)
 library(rAmCharts)
+library(data.table)
 
 # number of points
 n <- 1000000
 data <- data.frame(date = seq(c(ISOdate(1999,12,31)), by = "5 min", length.out = n),
-                          value = rnorm(n, 100, 50))
+                          value = rnorm(n, 100, 50), check.names = FALSE)
 
 # maximun of points in javascript
 max_points <- 1000

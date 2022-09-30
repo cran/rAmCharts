@@ -56,7 +56,7 @@ amCandlestick computes a candlestick chart of the given value.
 data("data_candleStick2")
 amCandlestick(data = data_candleStick2)
 
-\donttest{
+\dontrun{
 # Change colors
 amCandlestick(data = data_candleStick2, positiveColor = "black", negativeColor = "green")
 
@@ -87,7 +87,7 @@ amCandlestick(data = data_candleStick2, dataDateFormat = "YYYY-MM-DD", minPeriod
 if (requireNamespace("pipeR", quietly = TRUE)) {
 require(pipeR)
 
-amCandlestick(data = data_candleStick2, horiz = TRUE) %>>%
+amCandlestick(data = data_candleStick2, horiz = TRUE) \%>>\%
   setProperties(precision = 2) 
 }
 }

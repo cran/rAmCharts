@@ -60,13 +60,19 @@
 #' @param dataDateFormat \code{character} Data date format. Default to 'YYYY-MM-DD JJ:NN:ss'. See details.
 #' @param categoryBalloonDateFormats \code{list} Date format objects for chart cursor. See details.
 #' @param dateFormats \code{list} Date format objects for x-axis. See details.
+#' @param thousandsSeparator \code{character}, default set to " " 
+#' @param decimalSeparator \code{character}, default set to ".",
+#' @param balloonFontSize \code{numeric}, text font size on balloon. Default : 10.
+#' @param balloonMaxWidth \code{numeric}. Default : 400.
 #' @param ... other first level attributes
 #' 
 #' @examples
+#' 
+#' \dontrun{
+#' 
 #' data("data_stock_2")
 #' amTimeSeries(data_stock_2, "date", c("ts1", "ts2"))
 #' 
-#' \dontrun{
 #' # upper /lower
 #' data <- data_stock_2[1:50, ]
 #' data$ts1low <- data$ts1-100
@@ -245,6 +251,10 @@ amTimeSeries <- function(data, col_date,
                                                           list(period='mm', format = 'JJ:NN'), 
                                                           list(period = 'ss', format = 'JJ:NN:SS'),
                                                           list(period='fff', format = 'JJ:NN:SS')),
+                         thousandsSeparator = " ", 
+                         decimalSeparator = ".",
+                         balloonFontSize = 10,
+                         balloonMaxWidth = 400,
                          ...)
 {
   ##Test args
@@ -500,6 +510,8 @@ amTimeSeries <- function(data, col_date,
                  bullet = ifelse(is.null(graph_maker[x, "bullet"]), "none", graph_maker[x, "bullet"]),
                  bulletAlpha = graph_maker[x, "bulletAlpha"],
                  precision = precision,
+                 thousandsSeparator = thousandsSeparator, 
+                 decimalSeparator = decimalSeparator,
                  hidden = graph_maker[x, "hidden"],
                  lineThickness = graph_maker[x, "linewidth"]
       )
@@ -517,7 +529,9 @@ amTimeSeries <- function(data, col_date,
                  useDataSetColors = FALSE,
                  visibleInLegend = FALSE,
                  hidden = graph_maker[x, "hidden"],
-                 precision = precision
+                 precision = precision,
+                 thousandsSeparator = thousandsSeparator, 
+                 decimalSeparator = decimalSeparator
       )
     } else if(graph_maker[x, "am_type"] == "curve-uplow"){
       stockGraph(title =  graph_maker[x, "column"],
@@ -526,8 +540,21 @@ amTimeSeries <- function(data, col_date,
                  comparable = TRUE, periodValue = graph_maker[x, "aggregation"],
                  compareField = graph_maker[x, "column"],
                  balloonText = paste0(graph_maker[x+1, "column"],' : <b> [[', graph_maker[x+1, "column"], ']] </b><br>',
-                                      graph_maker[x, "column"], ' : <b> [[value]] </b><br>',
+                                      graph_maker[x, "column"], ' :<b> [[', graph_maker[x, "column"], ']] </b><br>',
                                       graph_maker[x-1, "column"],' : <b> [[', graph_maker[x-1, "column"], ']] </b>'),
+                 balloonFunction = htmlwidgets::JS(paste0('function(item, graph) {
+                    var result = graph.balloonText;
+                    for (var key in item.dataContext) {
+                      if (item.dataContext.hasOwnProperty(key) && !isNaN(item.dataContext[key])) {
+                        var formatted = AmCharts.formatNumber(item.dataContext[key], {
+                          precision: ', precision, ',
+                          decimalSeparator: "', decimalSeparator, '",
+                          thousandsSeparator: "', thousandsSeparator, '"
+                        }, ', precision, ');
+                        result = result.replace("[[" + key + "]]", formatted);
+                      }
+                    }
+                    return result;}')),
                  lineColor = graph_maker[x, "color"],
                  type = graph_maker[x, "type"],
                  fillAlphas = graph_maker[x, "fillAlphas"],
@@ -538,6 +565,8 @@ amTimeSeries <- function(data, col_date,
                  bullet = ifelse(is.null(graph_maker[x, "bullet"]), "none", graph_maker[x, "bullet"]),
                  bulletAlpha = graph_maker[x, "bulletAlpha"],
                  precision = precision,
+                 thousandsSeparator = thousandsSeparator, 
+                 decimalSeparator = decimalSeparator,
                  hidden = graph_maker[x, "hidden"],
                  lineThickness = graph_maker[x, "linewidth"]
       )
@@ -556,7 +585,9 @@ amTimeSeries <- function(data, col_date,
                  fillToGraph = graph_maker[x-2, "column"],
                  visibleInLegend = FALSE,
                  hidden = graph_maker[x, "hidden"],
-                 precision = precision
+                 precision = precision,
+                 thousandsSeparator = thousandsSeparator, 
+                 decimalSeparator = decimalSeparator
       )
     } 
     
@@ -599,7 +630,10 @@ amTimeSeries <- function(data, col_date,
                             groupToPeriods = groupToPeriods, 
                             maxSeries = maxSeries,
                             dateFormats = dateFormats),
-    setPanelsSettings(marginTop = 30, creditsPosition = creditsPosition, thousandsSeparator = " "),
+    setPanelsSettings(marginTop = 30, creditsPosition = creditsPosition, 
+                      thousandsSeparator = thousandsSeparator, 
+                      precision = precision, 
+                      decimalSeparator = decimalSeparator),
     setLegendSettings(position = legendPosition)
   )
   
@@ -611,6 +645,8 @@ amTimeSeries <- function(data, col_date,
                                            position = scrollbarPosition, height = scrollbarHeight)
   }
 
+  am_output@balloon <- list(maxWidth = balloonMaxWidth, fontSize = balloonFontSize)
+  
   am_output
 }
 

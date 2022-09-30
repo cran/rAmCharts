@@ -17,8 +17,8 @@ amPlot(x, ...)
 \method{amPlot}{numeric}(
   x,
   y,
-  bullet = c("round", "diamond", "square", "bubble", "yError", "xError", "triangleLeft",
-    "triangleRight", "triangleUp", "triangleDown"),
+  bullet = c("round", "diamond", "square", "bubble", "yError", "xError",
+    "triangleLeft", "triangleRight", "triangleUp", "triangleDown"),
   type = c("points", "line", "smoothedLine", "step", "both"),
   col = "#0066cc",
   fill_alphas = 0,
@@ -40,8 +40,8 @@ amPlot(x, ...)
 \method{amPlot}{character}(
   x,
   y,
-  bullet = c("round", "diamond", "square", "bubble", "yError", "xError", "triangleLeft",
-    "triangleRight", "triangleUp", "triangleDown"),
+  bullet = c("round", "diamond", "square", "bubble", "yError", "xError",
+    "triangleLeft", "triangleRight", "triangleUp", "triangleDown"),
   type = c("points", "line", "smoothedLine", "step", "both"),
   col = "#0066cc",
   fill_alphas = 0,
@@ -183,7 +183,7 @@ amPlot(iris, col = colnames(iris)[1:2], type = c("l", "st"), zoom = TRUE, legend
 amPlot(Petal.Length + Sepal.Length ~ Sepal.Width, data = iris, legend = TRUE, zoom = TRUE)
 }
 
-\donttest{
+\dontrun{
 # Other examples available which can be time consuming depending on your configuration.
 library(data.table)
 

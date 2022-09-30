@@ -45,6 +45,7 @@ Former properties will be overwritten.
 Former properties will be overwritten.
 }
 \examples{
+\dontrun{
 addListener(.Object = amPieChart(),
             name = "clickSlice" ,
             expression = "function(event){ alert('ok !'); }")
@@ -54,8 +55,15 @@ addListener(.Object = amLegend(),
             expression = paste0("function onSelect (properties) {",
                                 "alert('selected nodes: ' + properties.nodes);",
                                 "}"))
+}
+
+\dontrun{
 library(pipeR)
 amPlot(runif(10)) \%>>\% resetProperties("categoryAxis") \%>>\% print(withDetail = FALSE)
+}
+
+
+\dontrun{
 library(pipeR)
 # either you can set a list
 ls <- list(categoryAxis = list(gridPosition = "start"), fontSize = 15)
@@ -69,9 +77,11 @@ amPieChart() \%>>\%  setProperties(fontSize = 15) \%>>\%  setProperties(fontSize
 
 # Carefull if you try to set a property which is a slot...
 # in that case, use the setter methods 'setXX' or 'addXX' which check the validity
-\dontrun{
-amPieChart() %>>% setProperties(type = "serial") %>>% print()
-}
+
+amPieChart() \%>>\% setProperties(type = "serial") \%>>\% print()
+
 
 amPieChart() \%>>\% setExport()
+
+}
 }

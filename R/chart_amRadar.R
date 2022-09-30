@@ -14,10 +14,11 @@
 #' @param ... see \code{\link{amOptions}} for more options.
 #' 
 #' @examples
+#' 
+#' \dontrun{
+#'  
 #' data("data_radar")
 #' amRadar(data_radar)
-#' 
-#' \donttest{
 #' 
 #' # Other examples available which can be time consuming depending on your configuration.
 #' 

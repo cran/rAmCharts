@@ -39,9 +39,12 @@ amSolidGauge(
 amSolidGauge computes a gauge of the given value.
 }
 \examples{
+
+\dontrun{
+
 amSolidGauge(x = 65)
 
-\donttest{
+
 # Other examples available which can be time consuming depending on your configuration.
 
 if (requireNamespace("pipeR", quietly = TRUE)) {
