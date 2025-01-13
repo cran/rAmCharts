@@ -502,10 +502,7 @@ For method \code{addValueAxis}: valueAxis is optional. Method \code{addValueAxes
 Method \code{setValueAxis} is only valid for Gantt charts.
 }
 \examples{
-
-\dontrun{
 new("AmChart", valueField = "value", theme = "patterns")
-}
 
 \dontrun{
 amChart(type = "pie")

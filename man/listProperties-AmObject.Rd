@@ -20,9 +20,5 @@ Each S4 class implements the method to list its properties
 (usefull to update complex properties).
 }
 \examples{
-
-\dontrun{
 amChart(type = "serial")
-}
-
 }

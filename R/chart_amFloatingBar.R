@@ -45,9 +45,6 @@
 #' 
 #' 
 #' @examples
-#' 
-#' \dontrun{
-#' 
 #' # Load data
 #' data(data_fbar)
 #' data(data_gbar)
@@ -58,7 +55,7 @@
 #' amFloatingBar(x = "year", y_inf = "expenses", y_sup = "income", data = data_gbar,
 #'               dataDateFormat = "YYYY", minPeriod = "YYYY", zoom = TRUE)
 #'               
-#'
+#' \dontrun{
 #' # Other examples available which can be time consuming depending on your configuration.
 #' library(pipeR)
 #' 

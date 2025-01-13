@@ -48,16 +48,13 @@
 #' 
 #' 
 #' @examples
-#' 
-#' \dontrun{
-#' 
 #' # Data
 #' data(data_bar)
 #' data(data_gbar)
 #' 
 #' amBarplot(x = "country", y = "visits", data = data_bar, main = "example")
 #' 
-#' 
+#' \dontrun{
 #' 
 #' # Other examples available which can be time consuming depending on your configuration.
 #' 

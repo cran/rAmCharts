@@ -208,10 +208,7 @@ setClass(Class = "AmChart", contains = "AmObject",
 #' @return (updated) \linkS4class{AmChart} with given properties.
 #' 
 #' @examples
-#' 
-#' \dontrun{
 #' new("AmChart", valueField = "value", theme = "patterns")
-#' }
 #' 
 #' @seealso Refer to \url{https://docs.amcharts.com/3/javascriptcharts/}.
 #' @rdname initialize-AmChart

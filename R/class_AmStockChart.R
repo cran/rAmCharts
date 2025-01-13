@@ -166,8 +166,6 @@ amStockChart <- function(balloon, comparedDataSets, dataSets,
 #' #' # --- signature 'AmStockChart'
 #' #' listProperties(amStockChart(test = 1))
 #' #' 
-#' 
-#' \dontrun{
 #' setMethod(f = "listProperties", signature = "AmStockChart",
 #'           definition = function(.Object)
 #'           {
@@ -193,4 +191,3 @@ amStockChart <- function(balloon, comparedDataSets, dataSets,
 #'             
 #'             return(ls)
 #'           })
-#'  }
